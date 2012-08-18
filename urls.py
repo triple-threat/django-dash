@@ -1,5 +1,6 @@
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
 from django.conf.urls import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
 from promise.views import home, new_promise, support, profile, promise
@@ -13,6 +14,13 @@ urlpatterns = patterns('',
     url(r'^support/(?P<promise_id>[\d]+)/(?:(?P<supporter_id>[\d]+)/)?$', support, name="support"),
     url(r'^profile/(?P<username>[a-zA-Z0-9\-_]+)/', profile, name="profile"),
     url(r'^promise/(?P<promise_slug>[a-zA-Z0-9\-_]+)/', promise, name="promise"),
+)
+
+# serves the favicon.ico from the root
+urlpatterns += patterns('',
+    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {
+        'url': '{}img/favicon/favicon.ico'.format(settings.STATIC_URL)
+    }),
 )
 
 urlpatterns += staticfiles_urlpatterns()
