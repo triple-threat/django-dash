@@ -1,12 +1,11 @@
-<html>
-<body>
-    <form method="POST" action="{% url new_promise %}"> {% csrf_token %}
+{% extends "base.html" %}
+
+{% block content %}
+
+    <form method="POST" action="{% url new_promise %}">
+        {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit">Promise!</input>
+        <button type="submit">Promise!</button>
     </form>
-    {% for promise in promises %}
-    <div style="margin-bottom:40px">{{ promise.creator }} promised "{{promise.text}}".</p>
-        Deadline: {{ promise.deadline }} </div>
-    {% endfor %}
-</body>
-</html>
+
+{% endblock %}

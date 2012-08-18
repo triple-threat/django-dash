@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% block head_before %}
+        {% endblock %}
+
+        <link href="{{ STATIC_URL }}/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+
+        {% block head_after %}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_classes %}{% endblock %}">
+        {% block body_before %}
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+
+        {% block body_after %}
+        {% endblock %}
+    </body>
+</html>
+

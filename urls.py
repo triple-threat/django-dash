@@ -1,3 +1,4 @@
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
@@ -10,3 +11,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^newpromise/', new_promise, name='new_promise')
 )
+
+urlpatterns += staticfiles_urlpatterns()
