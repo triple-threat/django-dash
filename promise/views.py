@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 
 from promise.forms import NewPromiseForm
-from promise.models import Promise
+from promise.models import Promise, Profile
 
 
 class Home(TemplateView):
@@ -23,6 +23,14 @@ def new_promise(request):
         form = NewPromiseForm(request.POST)
         if form.is_valid():
             form.process(request)
+    return HttpResponseRedirect(reverse('home'))
+
+
+def support(request, promise_id, supporter_id):
+    promise = Promise.objects.get(id=promise_id)
+    supporter = Profile.objects.get(id=supporter_id)
+    if supporter != promise.creator and supporter not in promise.supporter.all():
+        promise.supporter.add(supporter)
     return HttpResponseRedirect(reverse('home'))
 
 

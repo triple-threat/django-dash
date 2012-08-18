@@ -26,6 +26,7 @@ class Promise(models.Model):
     def supporter_count(self):
         return self.supporter.all().count()
 
+
 class Profile(models.Model):
     user = models.OneToOneField('auth.User')
 

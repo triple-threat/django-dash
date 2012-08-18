@@ -9,6 +9,6 @@
     </form>
 {% for promise in promises %}
     <div style="margin-bottom:40px">{{ promise.creator }} promised "{{promise.text}}".</p>
-        Deadline: {{ promise.deadline }}, supporters ({{promise.supporter_count}}): {{promise.supporters}} </div>
+        Deadline: {{ promise.deadline }}, supporters ({{promise.supporter_count}}): {{promise.supporters}} </div> <a href="{% url support promise.id user.id %}"><button>Support</button></a>
     {% endfor %}
 {% endblock %}
