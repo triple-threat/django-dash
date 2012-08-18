@@ -1,7 +1,9 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-#from django.shortcuts import render_to_response
 from django.views.generic.base import TemplateView, View
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 
 from promise.forms import NewPromiseForm
 from promise.models import Promise, Profile
@@ -11,6 +13,10 @@ from util.rediz import get_support_key, connection as redis_connection
 
 class Home(TemplateView):
     template_name = 'home.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(Home, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         context = {

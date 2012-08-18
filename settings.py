@@ -14,6 +14,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+LOGIN_URL = '/login/'
+
 try:
     from local import *
 except ImportError:
