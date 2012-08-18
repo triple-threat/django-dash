@@ -1,0 +1,8 @@
+<html>
+<body>
+    {% for promise in promises %}
+    <div style="margin-bottom:40px">{{ promise.creator }} promised "{{promise.text}}".</p>
+        Deadline: {{ promise.deadline }} </div>
+    {% endfor %}
+</body>
+</html>
