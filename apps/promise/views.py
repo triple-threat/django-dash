@@ -68,11 +68,11 @@ class Support(View):
         conn.lpush(key, promise_id)
 
 
-class ProfilePage(TemplateView):
-    pass
-
-
 class PromisePage(TemplateView):
+    template_name = 'promise.html'
+
+
+class ProfilePage(TemplateView):
     pass
 
 
