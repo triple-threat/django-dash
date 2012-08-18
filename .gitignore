@@ -27,3 +27,4 @@ pip-log.txt
 .mr.developer.cfg
 local.py
 .DS_Store
+database
