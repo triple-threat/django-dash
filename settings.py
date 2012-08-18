@@ -4,7 +4,6 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'apps'))
 
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -13,41 +12,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-LOGIN_URL = '/login/'
-
-try:
-    from local import *
-except ImportError:
-    import dj_database_url
-    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': 'promise_local',                      # Or path to database file if using sqlite3.
-            'USER': 'root',                      # Not used with sqlite3.
-            'PASSWORD': '',                  # Not used with sqlite3.
-        }
-    }
-    REDIS_CONNECTIONS = {
-        "default": {
-            "HOST": "localhost",
-            "PORT": 6379
-        },
-        "stable": {
-            "HOST": "localhost",
-            "PORT": 6379
-        },
-        "unstable": {
-            "HOST": "localhost",
-            "PORT": 6379
-        },
-        "logging": {
-            "HOST": "localhost",
-            "PORT": 6379
-        },
-    }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -154,12 +118,37 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'social_auth',
     'promise',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
 )
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
+    'django.contrib.auth.context_processors.auth',
+)
+
+# API keys for social networks. As you see, we're using env variables
+# here. We also need to set it up in heroku. For development, you'll
+# have to fill them in our `local.py` file.
+TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY')
+TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET')
+FACEBOOK_APP_ID = os.environ.get('FACEBOOK_APP_ID')
+FACEBOOK_API_SECRET = os.environ.get('FACEBOOK_API_SECRET')
+
+# Authentication urls
+LOGIN_URL          = '/login/'
+LOGIN_REDIRECT_URL = '/loggedin/'
+LOGIN_ERROR_URL    = '/loginerror/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -189,3 +178,21 @@ LOGGING = {
         },
     }
 }
+
+# Loading the custom configuration file for local development variables.
+try:
+    from local import *
+except ImportError:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'database',                      # Or path to database file if using sqlite3.
+            'USER': '',                      # Not used with sqlite3.
+            'PASSWORD': '',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
