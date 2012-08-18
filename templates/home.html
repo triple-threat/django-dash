@@ -14,7 +14,7 @@
 
 {% for promise in promises %}
     <div style="margin-bottom:10px">
-        <p>{{ promise.creator }} promised "{{ promise.text }}".</p>
+        <p>{{ promise.creator }} promised <a href="{% url promise promise.slug %}">{{ promise.text }}".</a></p>
         <p>Deadline: {{ promise.deadline }}, supporters ({{ promise.supporter_count }}): {{ promise.supporters }}
 
         {% if promise.id in already_supporting %}
