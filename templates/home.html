@@ -8,7 +8,12 @@
         <button type="submit">Promise!</button>
     </form>
 {% for promise in promises %}
-    <div style="margin-bottom:40px">{{ promise.creator }} promised "{{promise.text}}".</p>
-        Deadline: {{ promise.deadline }}, supporters ({{promise.supporter_count}}): {{promise.supporters}} </div> <a href="{% url support promise.id user.id %}"><button>Support</button></a>
+    <div style="margin-bottom:10px">{{ promise.creator }} promised "{{promise.text}}".</p>
+        Deadline: {{ promise.deadline }}, supporters ({{promise.supporter_count}}): {{promise.supporters}} </div>
+        {% if promise.id in already_supporting %}
+        <h3>You support this.</h3>
+        {% else %}
+        <a href="{% url support promise.id user.id %}"><button>Support</button></a>
+        {% endif %}
     {% endfor %}
 {% endblock %}

@@ -23,3 +23,21 @@ class ConnectionManager(object):
         self.connection_dict[name] = conn
 
         return conn
+
+    @property
+    def stable(self):
+        return self.get_connection('stable')
+
+    @property
+    def unstable(self):
+        return self.get_connection('unstable')
+
+    @property
+    def logging(self):
+        return self.get_connection('logging')
+
+connection = ConnectionManager()
+
+
+def get_support_key(profile_id):
+    return unicode("{}:supports").format(profile_id)
