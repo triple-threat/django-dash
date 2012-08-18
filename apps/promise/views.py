@@ -16,11 +16,15 @@ class Home(TemplateView):
         context = {
             'promises': Promise.objects.order_by('-id'),
             'form': NewPromiseForm(),
-            'already_supporting': self.get_my_supported()
+            'already_supporting': self.get_promises_i_already_support()
         }
         return self.render_to_response(context)
 
-    def get_my_supported(self):
+    def get_promises_i_already_support(self):
+        """
+        Fetches from Redis a list of promise_ids that this user
+        already supports.
+        """
         conn = redis_connection.get_connection()
         key = get_support_key(self.request.user.profile.id)
         return [int(x) for x in conn.lrange(key, 0, -1)]
@@ -44,6 +48,9 @@ class Support(View):
         return HttpResponseRedirect(reverse('home'))
 
     def update_redis(self, promise_id):
+        """
+        In Redis, adds this promise to the list of promises that this user supports.
+        """
         conn = redis_connection.get_connection()
         key = get_support_key(self.request.user.profile.id)
         conn.lpush(key, promise_id)
