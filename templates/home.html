@@ -7,6 +7,7 @@
         {{ form.as_p }}
         <button type="submit">Promise!</button>
     </form>
+
 {% for promise in promises %}
     <div style="margin-bottom:10px">{{ promise.creator }} promised "{{promise.text}}".</p>
         Deadline: {{ promise.deadline }}, supporters ({{promise.supporter_count}}): {{promise.supporters}} </div>
@@ -15,5 +16,9 @@
         {% else %}
         <a href="{% url support promise.id user.id %}"><button>Support</button></a>
         {% endif %}
-    {% endfor %}
+{% endfor %}
+
+    <footer class="footer">
+        <p>© Promisely. Made with <strong>♥</strong> for <a title="django dash" href="http://djangodash.com/">django dash</a>.</p>
+    </footer>
 {% endblock %}
