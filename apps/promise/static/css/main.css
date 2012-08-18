@@ -4232,3 +4232,6 @@ a.badge:hover {
 .promise-content {
   margin-left: 100px;
 }
+body {
+  background: red;
+}
