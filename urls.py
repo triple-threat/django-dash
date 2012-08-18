@@ -8,10 +8,10 @@ from promise.views import home, new_promise, support, profile, promise, login
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'', include('social_auth.urls')),
     url(r'^$', home, name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^newpromise/', new_promise, name='new_promise'),
+    url(r'^facebook/', include('django_facebook.urls')),
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
     url(r'^logout/$', 'django.contrib.auth.views.logout'),
     url(r'^support/(?P<promise_id>[\d]+)/(?:(?P<supporter_id>[\d]+)/)?$', support, name="support"),
