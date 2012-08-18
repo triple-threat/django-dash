@@ -5,6 +5,11 @@ from django import forms
 from models import Promise
 
 
+class LoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(max_length=128, widget=forms.PasswordInput)
+
+
 class NewPromiseForm(forms.Form):
     text = forms.CharField()
     deadline = forms.DateField(initial=datetime.datetime.today)

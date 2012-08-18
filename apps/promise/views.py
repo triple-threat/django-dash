@@ -1,11 +1,14 @@
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
-from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 
-from promise.forms import NewPromiseForm
+from promise.forms import NewPromiseForm, LoginForm
 from promise.models import Promise, Profile
 
 from util.rediz import get_support_key, connection as redis_connection
@@ -76,7 +79,19 @@ class ProfilePage(TemplateView):
     pass
 
 
+class Login(TemplateView):
+    template_name = 'login.html'
+
+    def get(self, request):
+        context = {
+            'form': LoginForm(),
+        }
+        context.update(csrf(request))
+        return self.render_to_response(context)
+
+
 home = Home.as_view()
 support = Support.as_view()
 profile = ProfilePage.as_view()
 promise = PromisePage.as_view()
+login = Login.as_view()

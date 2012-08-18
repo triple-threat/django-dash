@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>Login</title>
+  </head>
+  <body>
+    <form method="post" id="login" action="{% url django.contrib.auth.views.login %}">
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+      <label for="email">Email address</label>
+      {{ form.username }}
+
+      <label for="password">{{ form.password.label_tag }}</label>
+      {{ form.password }}
+
+      <input type="submit" value="Login">
+    </form>
+  </body>
+</html>

@@ -147,8 +147,9 @@ FACEBOOK_API_SECRET = os.environ.get('FACEBOOK_API_SECRET')
 
 # Authentication urls
 LOGIN_URL          = '/login/'
-LOGIN_REDIRECT_URL = '/loggedin/'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL    = '/loginerror/'
+LOGOUT_URL         = '/logout/?next=/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -188,11 +189,9 @@ except ImportError:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': 'database',                      # Or path to database file if using sqlite3.
-            'USER': '',                      # Not used with sqlite3.
-            'PASSWORD': '',                  # Not used with sqlite3.
-            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'promise_local',
+            'USER': 'root',
+            'PASSWORD': ''
         }
     }
