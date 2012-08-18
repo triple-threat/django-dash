@@ -35,6 +35,10 @@ class Promise(models.Model):
         return self.supporter.all()
 
     @property
+    def full_url(self):
+        return unicode("http://promise.ly/promise/{}").format(self.slug)
+
+    @property
     def supporter_count(self):
         return self.supporter.all().count()
 

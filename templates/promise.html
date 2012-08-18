@@ -1,4 +1,14 @@
 {% extends 'base.html' %}
+{% block head_before %}
+<meta property="og:title" content="Support {{promise.creator}}"/>
+If you use Open Graph tags, the following six are required:
+
+og:title - The title of the entity.
+og:type - The type of entity. You must select a type from the list of Open Graph types.
+og:image - The URL to an image that represents the entity. Images must be at least 50 pixels by 50 pixels. Square images work best, but you are allowed to use images up to three times as wide as they are tall.
+og:url
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
   <h1>Promise.ly</h1>
@@ -22,6 +32,7 @@
     </div>
     <h4>&mdash; {{promise.creator}}</h4>
     <h5>{{promise.deadline}}</h5>
+    <a href="http://www.facebook.com/sharer.php?u={{promise.full_url}}&t={{promise.text}}" target="_blank">Share to FB</a>
   </div>
   <div class="span3">
     Related promises
