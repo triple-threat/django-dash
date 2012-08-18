@@ -13,13 +13,16 @@
     </form>
 
 {% for promise in promises %}
-    <div style="margin-bottom:10px">{{ promise.creator }} promised "{{promise.text}}".</p>
-        Deadline: {{ promise.deadline }}, supporters ({{promise.supporter_count}}): {{promise.supporters}} </div>
+    <div style="margin-bottom:10px">
+        <p>{{ promise.creator }} promised "{{ promise.text }}".</p>
+        <p>Deadline: {{ promise.deadline }}, supporters ({{ promise.supporter_count }}): {{ promise.supporters }}
+
         {% if promise.id in already_supporting %}
-        <h3>You support this.</h3>
+           <h3>You support this.</h3>
         {% else %}
-        <a href="{% url support promise.id user.profile.id %}"><button>Support</button></a>
+            <a title="Support" href="{% url support promise.id user.id %}">Support</a>
         {% endif %}
+    </div>
 {% endfor %}
 
 {% endblock %}
