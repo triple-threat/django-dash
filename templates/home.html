@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load htmlattributes %}
 
 {% block content %}
 
@@ -8,8 +9,14 @@
 
     <form class="well form-search" method="POST" action="{% url new_promise %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Promise!</button>
+
+        {{ form.non_field_errors }}
+
+        {{ form.text|htmlattributes:'placeholder="Your promise, for example: I\'ll lose 3 pounds till next week"' }}
+
+        {{ form.deadline }}
+
+        <button type="submit" class="btn btn-primary">I Promise!</button>
     </form>
 
     {% if promises %}

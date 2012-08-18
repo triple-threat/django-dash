@@ -12,4 +12,9 @@ setup_local:
 	npm install less -g
 	pip install -r requirements-local.txt
 
+reset_local_database:
+	mysql -uroot -e"DROP DATABASE promise_local; CREATE DATABASE promise_local;"
+	python manage.py syncdb
+	python manage.py generate_profiles_and_promises
+
 .PHONY: watch
