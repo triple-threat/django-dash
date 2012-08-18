@@ -1,6 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="page-header">
+    <h1>Promise.ly</h1>
+</div>
 
+<div class="row">
+    <div class="span3">
+        <div style="width: 200px; height: 200px; overflow: hidden">
+        <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/211306_1104390006_3470883_n.jpg"/>
+        </div>
+        <h4>{{promise.creator}}</h4>
+    </div>
+    <div class="span6">
+        <div>
+            <span style="line-height:40px; font-size:30px"><em>"{{promise.text}}"</em></span>
+        </div>
+        <h5>{{promise.deadline}}</h5>
+
+    </div>
+    <div class="span3">
+        Related promises
+    </div>
+</div>
+
+{% comment %}
 <div id="disqus_thread"></div>
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -16,4 +39,5 @@
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
+{% endcomment %}
 {% endblock %}

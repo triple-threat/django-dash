@@ -72,6 +72,10 @@ class Support(View):
 class PromisePage(TemplateView):
     template_name = 'promise.html'
 
+    def get(self, request, promise_slug):
+        promise = Promise.objects.get(slug=promise_slug)
+        return self.render_to_response({'promise': promise})
+
 
 class ProfilePage(TemplateView):
     pass
