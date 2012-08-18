@@ -17,20 +17,16 @@ from util.rediz import get_support_key, connection as redis_connection
 class Home(TemplateView):
     template_name = 'home.html'
 
-    def get(self, request, *args, **kwargs):
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(Home, self).dispatch(request, *args, **kwargs)
 
-        if not request.user.is_authenticated():
-            self.template_name = 'login.html'
-            context = {
-                'form': LoginForm(),
-            }
-            context.update(csrf(request))
-        else:
-            context = {
-                'promises': Promise.objects.order_by('-id'),
-                'form': NewPromiseForm(),
-                'already_supporting': self.get_promises_i_already_support()
-            }
+    def get(self, request, *args, **kwargs):
+        context = {
+            'promises': Promise.objects.order_by('-id'),
+            'form': NewPromiseForm(),
+            'already_supporting': self.get_promises_i_already_support()
+        }
         return self.render_to_response(context)
 
     def get_promises_i_already_support(self):
