@@ -7,8 +7,9 @@ watch:
 	echo "Watching less files..."
 	watchr -e "watch('less/.*\.less') { system 'make compile_less' }"
 
-dev_setup:
+setup_local:
         gem install watchr
         npm install less -g
+        pip install -r requirements-local.txt
 
 .PHONY: watch
