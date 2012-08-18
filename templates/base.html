@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
     <head>
         {% block head_before %}
         {% endblock %}
@@ -16,8 +15,14 @@
         {% block body_before %}
         {% endblock %}
 
-        {% block content %}
-        {% endblock %}
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+
+            <footer class="footer">
+                <p>© Promisely. Made with <strong>♥</strong> for <a title="django dash" href="http://djangodash.com/">django dash</a>.</p>
+            </footer>
+        </div>
 
         {% block body_after %}
         {% endblock %}
