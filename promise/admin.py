@@ -4,11 +4,10 @@ from models import Promise, Profile
 
 
 class PromiseAdmin(admin.ModelAdmin):
-    list_display = ('creator', 'text', 'status', 'deadline')
+    list_display = ('creator', 'text', 'status', 'deadline', 'supporters')
     list_filter = ('creator', 'status')
     search_fields = ['creator__user', 'text']
     ordering = ('-id',)
-
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user',)
