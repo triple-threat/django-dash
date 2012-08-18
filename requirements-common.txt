@@ -1,4 +1,5 @@
+PIL==1.1.7
 Django==1.4
+django-facebook==4.0.9
 redis==2.6.2
-django-social-auth==0.7.4
 South==0.7.4

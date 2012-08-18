@@ -5,6 +5,7 @@
   <body>
     <form method="post" id="login" action="{% url django.contrib.auth.views.login %}">
       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+      <input type="hidden" value="{{ next }}" name="next">
 
       <label for="email">Email address</label>
       {{ form.username }}
@@ -13,6 +14,10 @@
       {{ form.password }}
 
       <input type="submit" value="Login">
+    </form>
+
+    <form method="post" id="fblogin" action="{% url facebook_connect %}?facebook_login=1">
+      <input type="submit" value="Login via facebook">
     </form>
   </body>
 </html>

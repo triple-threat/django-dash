@@ -1,5 +1,8 @@
 from django.db import models
 from util.model_helpers import unique_slugify
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+from django_facebook.models import FacebookProfileModel
 
 
 PROMISE_STATUSES = (
@@ -34,9 +37,14 @@ class Promise(models.Model):
         super(Promise, self).save(*args, **kwargs)
 
 
-class Profile(models.Model):
+class Profile(FacebookProfileModel):
     user = models.OneToOneField('auth.User')
 
     def __unicode__(self):
         return unicode(self.user)
 
+
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+post_save.connect(create_profile, sender=User)

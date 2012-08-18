@@ -105,14 +105,11 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
+    'django_facebook.context_processors.facebook',
     'django.core.context_processors.debug',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.contrib.auth.context_processors.auth',
-    'social_auth.context_processors.social_auth_by_name_backends',
-    'social_auth.context_processors.social_auth_backends',
-    'social_auth.context_processors.social_auth_by_type_backends',
-    'social_auth.context_processors.social_auth_login_redirect',
 )
 
 INSTALLED_APPS = (
@@ -123,19 +120,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'social_auth',
+    'django_facebook',
     'promise',
     'util',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
-
-AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.twitter.TwitterBackend',
-    'social_auth.backends.facebook.FacebookBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
 
 # API keys for social networks. As you see, we're using env variables
 # here. We also need to set it up in heroku. For development, you'll
@@ -143,7 +133,17 @@ AUTHENTICATION_BACKENDS = (
 TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY')
 TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET')
 FACEBOOK_APP_ID = os.environ.get('FACEBOOK_APP_ID')
-FACEBOOK_API_SECRET = os.environ.get('FACEBOOK_API_SECRET')
+FACEBOOK_APP_SECRET = os.environ.get('FACEBOOK_APP_SECRET')
+
+# Let's go social!
+AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'django_facebook.auth_backends.FacebookBackend',
+)
+FACEBOOK_DEFAULT_SCOPE = (
+    'email', 'user_about_me', 'user_birthday', 'publish_stream',
+)
 
 # Authentication urls
 LOGIN_URL          = '/login/'
