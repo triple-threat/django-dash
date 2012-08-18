@@ -1,4 +1,9 @@
 # Django settings for promisely project.
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'apps'))
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -25,7 +30,24 @@ else:
             'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
         }
     }
-    REDIS_CONNECTIONS['default']['HOST'] = 'localhost'
+    REDIS_CONNECTIONS = {
+        "default": {
+            "HOST": "localhost",
+            "PORT": 6379
+        },
+        "stable": {
+            "HOST": "localhost",
+            "PORT": 6379
+        },
+        "unstable": {
+            "HOST": "localhost",
+            "PORT": 6379
+        },
+        "logging": {
+            "HOST": "localhost",
+            "PORT": 6379
+        },
+    }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
