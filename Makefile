@@ -1,5 +1,7 @@
+STATIC_ROOT=apps/promise/static
+
 compile_less:
-	lessc promise/static/less/main.less > promise/static/css/main.css
+	lessc ${STATIC_ROOT}/less/main.less > ${STATIC_ROOT}/css/main.css
 
 watch:
 	echo "Watching less files..."
