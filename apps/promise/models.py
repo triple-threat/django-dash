@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from util.model_helpers import unique_slugify
 from django.db.models.signals import post_save
@@ -26,6 +28,10 @@ class Promise(models.Model):
     @property
     def supporters(self):
         return ",".join([unicode(supporter) for supporter in self.supporter.all()])
+
+    @property
+    def supporter_list(self):
+        return self.supporter.all()
 
     @property
     def supporter_count(self):
