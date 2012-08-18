@@ -180,6 +180,10 @@ LOGGING = {
     }
 }
 
+
+REDIS_CONNECTION = os.environ.get('REDIS_REDISTOGO_URL')
+
+
 # Loading the custom configuration file for local development variables.
 try:
     from local import *

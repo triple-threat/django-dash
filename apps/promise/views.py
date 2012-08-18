@@ -34,9 +34,8 @@ class Home(TemplateView):
         Fetches from Redis a list of promise_ids that this user
         already supports.
         """
-        conn = redis_connection.get_connection()
         key = get_support_key(self.request.user.profile.id)
-        return [int(x) for x in conn.lrange(key, 0, -1)]
+        return [int(x) for x in redis_connection.lrange(key, 0, -1)]
 
 
 def new_promise(request):
@@ -66,9 +65,8 @@ class Support(View):
         """
         In Redis, adds this promise to the list of promises that this user supports.
         """
-        conn = redis_connection.get_connection()
         key = get_support_key(self.request.user.profile.id)
-        conn.lpush(key, promise_id)
+        redis_connection.lpush(key, promise_id)
 
 
 class PromisePage(TemplateView):
