@@ -37,6 +37,9 @@ class Home(TemplateView):
 
 
 def new_promise(request):
+    """
+    Creates a new promise
+    """
     if request.POST:
         form = NewPromiseForm(request.POST)
         if form.is_valid():
@@ -46,6 +49,9 @@ def new_promise(request):
 
 class Support(View):
     def get(self, request, promise_id, supporter_id):
+        """
+        Adds a supporter, making sure not to duplicate.
+        """
         promise = Promise.objects.get(id=promise_id)
         supporter = Profile.objects.get(id=supporter_id)
         if supporter != promise.creator and supporter not in promise.supporter.all():
@@ -62,5 +68,15 @@ class Support(View):
         conn.lpush(key, promise_id)
 
 
+class ProfilePage(TemplateView):
+    pass
+
+
+class PromisePage(TemplateView):
+    pass
+
+
 home = Home.as_view()
 support = Support.as_view()
+profile = ProfilePage.as_view()
+promise = PromisePage.as_view()
