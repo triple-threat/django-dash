@@ -121,6 +121,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'social_auth',
     'promise',
+    'util',
+    # Uncomment the next line to enable admin documentation:
+    # 'django.contrib.admindocs',
 )
 
 AUTHENTICATION_BACKENDS = (
