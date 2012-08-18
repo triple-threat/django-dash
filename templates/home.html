@@ -12,17 +12,42 @@
         <button type="submit" class="btn btn-primary">Promise!</button>
     </form>
 
-{% for promise in promises %}
-    <div style="margin-bottom:10px">
-        <p>{{ promise.creator }} promised <a href="{% url promise promise.slug %}">{{ promise.text }}".</a></p>
-        <p>Deadline: {{ promise.deadline }}, supporters ({{ promise.supporter_count }}): {{ promise.supporters }}
+    {% if promises %}
+    <ul class="unstyled">
+    {% for promise in promises %}
+        <li class="promise">
+            <div class="promise-image">
+                <img src="http://placekitten.com/80/80" alt="Avatar from {{ promise.creator }}" />
+            </div>
 
-        {% if promise.id in already_supporting %}
-           <h3>You support this.</h3>
-        {% else %}
-            <a title="Support" href="{% url support promise.id user.profile.id %}">Support</a>
-        {% endif %}
-    </div>
-{% endfor %}
+            <div class="promise-content">
+                <p><strong>{{ promise.creator }}</strong> promised:</p>
+                <blockquote><a href="{% url promise promise.slug %}">{{ promise.text }}</a></blockquote>
+                <p><strong>Deadline:</strong> {{ promise.deadline|timeuntil }}</p>
+
+                {% if promise.supporter_count %}
+
+                <p><strong>Supporters ({{ promise.supporter_count }}):</strong> {{ promise.supporters }}</p>
+
+                    {% if not promise.id in already_supporting %}
+
+                    <a title="Support" href="{% url support promise.id user.profile.id %}">Support</a>
+
+                    {% endif %}
+
+                {% else %}
+
+                <p><strong>No Supporters yet.</strong> <a title="Support it" href="{% url support promise.id user.profile.id %}">Support it</a></p>
+
+                {% endif %}
+
+                {% if promise.id in already_supporting %}
+                <h3>You support this.</h3>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
 
 {% endblock %}
