@@ -17,6 +17,7 @@ PROMISE_STATUSES = (
 class Promise(models.Model):
     text = models.TextField()
     creator = models.ForeignKey('promise.Profile', related_name='creator')
+    created = models.DateTimeField(auto_now=True)
     deadline = models.DateTimeField()
     status = models.PositiveSmallIntegerField(choices=PROMISE_STATUSES, default=1)
     supporter = models.ManyToManyField('promise.Profile', blank=True, related_name='supporter')
