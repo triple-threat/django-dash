@@ -18,7 +18,7 @@
         {% if promise.id in already_supporting %}
         <h3>You support this.</h3>
         {% else %}
-        <a href="{% url support promise.id user.id %}"><button>Support</button></a>
+        <a href="{% url support promise.id user.profile.id %}"><button>Support</button></a>
         {% endif %}
 {% endfor %}
 
