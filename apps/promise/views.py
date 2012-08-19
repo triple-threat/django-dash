@@ -2,19 +2,20 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
+from django.shortcuts import render
 
 
 from promise.forms import NewPromiseForm
 from promise.models import Promise, Profile
 
-from util.rediz import get_support_key, get_promise_key, \
-    get_ids_from_redis, connection as redis_connection
+from util.rediz import get_support_key, get_promise_key, connection as redis_connection
 
 from event.logging import logger
 
 
 class Home(TemplateView):
     template_name = 'home.html'
+    ajax_template_name = 'ajax_home.html'
 
     def dispatch(self, request, *args, **kwargs):
         return super(Home, self).dispatch(request, *args, **kwargs)
@@ -22,9 +23,12 @@ class Home(TemplateView):
     def get(self, request, *args, **kwargs):
         context = {
             'promises': self.get_promises(),
-            'form': NewPromiseForm(),
         }
-        return self.render_to_response(context)
+        if request.is_ajax():
+            return render(request, self.ajax_template_name, context)
+        else:
+            context['form'] = NewPromiseForm()
+            return self.render_to_response(context)
 
     def get_promises(self):
         f = self.request.GET.get('f')
