@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from promise.forms import NewPromiseForm
 from promise.models import Promise, Profile
+from promise.templatetags.social import social
 
 from util.rediz import get_support_key, get_promise_key, connection as redis_connection
 
@@ -53,6 +54,13 @@ class ValidatePromise(View):
         promise = Promise.objects.get(slug=promise_slug)
         promise.status = result
         promise.save()
+
+        # Posting to facebook
+        post_data = social(promise, self.request.user.profile)
+        msg = (u'I just achieved my promise on Promise.ly: '
+               u'{post_description}. Thanks, everyone for your support!')
+        self.request.user.profile.wall_post(
+            self.request, msg.format(**post_data))
         return HttpResponseRedirect(reverse('promise', args=[promise_slug]))
 
 
@@ -91,6 +99,14 @@ class NewPromise(View):
             key = get_promise_key(self.request.user.profile.id)
             redis_connection.lpush(key, new_promise.id)
 
+            # Posting to facebook
+            if data['facebook_share'] == 'on':
+                post_data = social(new_promise, self.request.user.profile)
+                msg = (u'I just created a promise on Promise.ly: '
+                       u'{post_description}. Please support me! {link}')
+                self.request.user.profile.wall_post(
+                    self.request, msg.format(**post_data))
+
             # Logging stuff
             logger.log('promise', data={
                 'creator_id': new_promise.creator.id,
@@ -116,6 +132,15 @@ class Support(View):
             promise.supporter.add(supporter)
             self.update_redis(promise.id)
             logger.log('support', data={'supporter_id': supporter.id, 'promise_id': promise.id})
+
+            # Posting to facebook
+            post_data = {
+                'creator': promise.creator.name,
+                'link': promise.get_absolute_url()}
+            msg = (u'I just supported {creator}\'s promise on Promise.ly! '
+                   u'Give your support, too. {link}')
+            self.request.user.profile.wall_post(
+                self.request, msg.format(**post_data))
 
         return HttpResponseRedirect(next_url or reverse('promise', args=[promise.slug]))
 
