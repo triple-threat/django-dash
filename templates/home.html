@@ -18,14 +18,16 @@
     </form>
 
     {% if promises %}
-    <div class="row">
-        <ul class="nav nav-pills feed-tabs pull-right">
-            <li class="loader"></li>
-            <li><a class="default" href="{% url home %}">All</a></li>
-            <li><a href="{% url home %}?f=my-promises">My promises</a></li>
-            <li><a href="{% url home %}?f=supported-by-me">Supported by me</a></li>
-        </ul>
-    </div>
+      {% if user.is_authenticated %}
+        <div class="row">
+            <ul class="nav nav-pills feed-tabs pull-right">
+                <li class="loader"></li>
+                <li><a class="default" href="{% url home %}">All</a></li>
+                <li><a href="{% url home %}?f=my-promises">My promises</a></li>
+                <li><a href="{% url home %}?f=supported-by-me">Supported by me</a></li>
+            </ul>
+        </div>
+      {% endif %}
 
     <div id="promise-feed-content" class="promise-feed-content">
         {% include "ajax_home.html" %}

@@ -34,7 +34,7 @@ class Home(TemplateView):
         f = self.request.GET.get('f')
         promises = Promise.objects.order_by('-id').active()
         if self.request.user.is_authenticated():
-
+            profile = self.request.user.profile
             if f == 'my-promises':
                 return Promise.objects.filter(creator=profile).active()
             elif f == 'supported-by-me':
