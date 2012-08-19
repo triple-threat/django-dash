@@ -39,7 +39,7 @@ class Home(BasePromiseView):
     def get(self, request, *args, **kwargs):
         context = self.default_context
         context.update({
-            'promises': Promise.objects.order_by('-id'),
+            'promises': Promise.objects.order_by('-id').active(),
             'form': NewPromiseForm(),
         })
         return self.render_to_response(context)
@@ -95,11 +95,6 @@ class PromisePage(BasePromiseView):
         return self.render_to_response(context)
 
 
-class ProfilePage(TemplateView):
-    pass
-
-
 home = Home.as_view()
 support = Support.as_view()
-profile = ProfilePage.as_view()
 promise = PromisePage.as_view()

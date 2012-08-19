@@ -9,6 +9,8 @@ from django.utils.safestring import mark_safe
 from util.model_helpers import unique_slugify
 from util import url_with_domain
 
+from promise.managers import PromiseManager
+
 
 PROMISE_STATUSES = (
     (1, "In Progress"),
@@ -25,6 +27,8 @@ class Promise(models.Model):
     status = models.PositiveSmallIntegerField(choices=PROMISE_STATUSES, default=1)
     supporter = models.ManyToManyField('promise.Profile', blank=True, related_name='supporter')
     slug = models.SlugField(unique=True, blank=True)
+
+    objects = PromiseManager()
 
     def __unicode__(self):
         return u"{}:{}".format(self.text[:15], self.creator)
