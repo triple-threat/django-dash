@@ -4,10 +4,6 @@
 
 {% block content %}
 
-    <div class="page-header">
-        <h1>Promise.ly</h1>
-    </div>
-
     <form class="promise-form well form-search control-group" method="POST" action="{% url new_promise %}">
         {% csrf_token %}
 
