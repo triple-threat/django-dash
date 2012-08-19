@@ -25,7 +25,7 @@ class EmailEngine(object):
 
 class NewSupporterEngine(EmailEngine):
 
-    template = 'emailer/new_supporter.txt'
+    template = 'emailer/new_supporter.html'
 
     def __init__(self, supporter_id, promise_id):
         self.supporter = Profile.objects.get(id=supporter_id)
