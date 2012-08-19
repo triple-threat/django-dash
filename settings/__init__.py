@@ -176,9 +176,15 @@ LOGGING = {
     }
 }
 
-
+# Redis connection configuration
 REDIS_CONNECTION = os.environ.get('REDISTOGO_URL')
 
+# Using sendgrid with environment vars set with heroku config
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ.get('SENDGRID_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
 
 # Loading the custom configuration file for local development variables.
 try:
