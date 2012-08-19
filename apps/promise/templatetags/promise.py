@@ -17,7 +17,7 @@ def userpromise(parser, token):
     states = {}
 
     # Parse until we find one of our default_status items
-    print parser.parse(default_states)
+    parser.parse(default_states)
 
     # Let's iterate over our context and find our tokens
     token = parser.next_token()
