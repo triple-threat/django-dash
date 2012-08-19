@@ -142,7 +142,7 @@ AUTHENTICATION_BACKENDS = (
     'django_facebook.auth_backends.FacebookBackend',
 )
 FACEBOOK_DEFAULT_SCOPE = (
-    'email', 'user_about_me', 'user_birthday', 'publish_stream',
+    'email', 'user_about_me', 'user_birthday',
 )
 
 # Authentication urls
