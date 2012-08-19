@@ -115,7 +115,7 @@ class Support(View):
             self.update_redis(promise.id)
             logger.log('support', data={'supporter_id': supporter.id, 'promise_id': promise.id})
 
-        return HttpResponseRedirect(next_url or reverse('home'))
+        return HttpResponseRedirect(next_url or reverse('promise', args=[promise.slug]))
 
     def update_redis(self, promise_id):
         """
