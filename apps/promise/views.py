@@ -46,7 +46,7 @@ def new_promise(request):
 
 class Support(View):
 
-    def get(self, request, promise_id):
+    def get(self, request, promise_id, next_url=None):
         """
         Adds a supporter, making sure not to duplicate.
         """
@@ -55,10 +55,9 @@ class Support(View):
         if supporter != promise.creator and supporter not in promise.supporter.all():
             promise.supporter.add(supporter)
             self.update_redis(promise.id)
-
             logger.log('support', data={'supporter_id': supporter.id, 'promise_id': promise.id})
 
-        return HttpResponseRedirect(reverse('home'))
+        return HttpResponseRedirect(next_url or reverse('home'))
 
     def update_redis(self, promise_id):
         """
