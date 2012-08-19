@@ -18,8 +18,8 @@
 
     <form method="post" id="fblogin" action="{% url facebook_connect %}?facebook_login=1">
       <input
-         type="hidden" value="{% if next %}{{ next }}{% else %}/{% endif %}"
-         name="redirect_url">
+         type="hidden" name="redirect_url"
+         value="{% if next %}{{ next }}{% else %}/{% endif %}">
       <input type="submit" value="Login via facebook">
     </form>
   </body>
