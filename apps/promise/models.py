@@ -6,8 +6,9 @@ from django_facebook.models import FacebookProfileModel
 from django.template.defaultfilters import urlencode
 from django.utils.safestring import mark_safe
 
-from util.model_helpers import unique_slugify
 from util import url_with_domain
+from util.model_helpers import unique_slugify
+from util.rediz import get_support_key, get_promise_key, get_ids_from_redis
 
 from promise.managers import PromiseManager
 
@@ -86,6 +87,49 @@ class Profile(FacebookProfileModel):
 
     def __unicode__(self):
         return unicode(self.user)
+
+
+class PromiseUserState(object):
+    """Namespace to store status that relates an user to a promise.
+
+    It's used to decide which widget should be shown to the user when
+    accessing the promise page or the promise feed. All Anonymous users
+    should be marked as "NOTHING".
+
+    Namespaces are one honking great idea -- let's do more of those!
+    """
+    OWNER = 0
+    SUPPORTER = 1
+    NOTHING = 2
+
+    @staticmethod
+    def from_string(state):
+        return getattr(PromiseUserState, state.upper())
+
+
+def user_promise_state(user, promise):
+    """Returns the status between the promise and the currently logged
+    in (or anonymous) user. Just a helper to avoid ifs/elifs to
+    proliferate in our codebase.
+    """
+
+    # We got an anonymous user here, he obviously can't support
+    # anything. Let's give him a chance to show the "support this"
+    # button.
+    if user.is_anonymous():
+        return PromiseUserState.NOTHING
+
+    # For owners
+    promise_key = get_promise_key(user.profile.id)
+    if promise.id in get_ids_from_redis(promise_key):
+        return PromiseUserState.OWNER
+
+    # For supporters
+    support_key = get_support_key(user.profile.id)
+    if promise.id in get_ids_from_redis(support_key):
+        return PromiseUserState.SUPPORTER
+
+    return PromiseUserState.NOTHING
 
 
 def create_profile(sender, instance, created, **kwargs):

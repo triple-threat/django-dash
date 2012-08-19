@@ -14,34 +14,17 @@ from util.rediz import get_support_key, get_promise_key, \
 from event.logging import logger
 
 
-class BasePromiseView(TemplateView):
-
-    @property
-    def default_context(self):
-        promise_key = get_promise_key(self.request.user.profile.id)
-        support_key = get_support_key(self.request.user.profile.id)
-        context = {
-            'already_supporting': get_ids_from_redis(support_key),
-            'my_promises': get_ids_from_redis(promise_key),
-        }
-
-        copy = context.copy()
-        return copy
-
-
-class Home(BasePromiseView):
+class Home(TemplateView):
     template_name = 'home.html'
 
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(Home, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        context = self.default_context
-        context.update({
+        context = {
             'promises': Promise.objects.order_by('-id').active(),
             'form': NewPromiseForm(),
-        })
+        }
         return self.render_to_response(context)
 
 
@@ -71,6 +54,7 @@ class Support(View):
         if supporter != promise.creator and supporter not in promise.supporter.all():
             promise.supporter.add(supporter)
             self.update_redis(promise.id)
+
             logger.log('support', data={'supporter_id': supporter.id, 'promise_id': promise.id})
 
         return HttpResponseRedirect(reverse('home'))
@@ -83,15 +67,14 @@ class Support(View):
         redis_connection.lpush(key, promise_id)
 
 
-class PromisePage(BasePromiseView):
+class PromisePage(TemplateView):
     template_name = 'promise.html'
 
     def get(self, request, promise_slug):
-        context = self.default_context
-        context.update({
+        context = {
             'app_id': settings.FACEBOOK_APP_ID,
             'promise': Promise.objects.get(slug=promise_slug),
-        })
+        }
         return self.render_to_response(context)
 
 

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load htmlattributes %}
 {% load social %}
+{% load promise %}
 
 {% block content %}
 
@@ -27,19 +28,21 @@
                 <blockquote><a href="{% url promise promise.slug %}">{{ promise.text }}</a></blockquote>
                 <p><i class="icon-time"></i> {{ promise.deadline|timeuntil }} left</p>
 
-                {% if promise.supporter_count %}
+                {% if promise.supporter.count %}
+                <p>
+                  <strong>Supporters ({{ promise.supporter.count }}):</strong>
+                  {{ promise.supporters|truncatewords:20 }}
+                </p>
+                {% endif %}
 
-                <p><strong>Supporters ({{ promise.supporter_count }}):</strong> {{ promise.supporters|truncatewords:20 }}</p>
-                {% endif %}
-                {% if promise.id not in my_promises %}
-                    {% if promise.id not in already_supporting %}
-                        <p><a title="Support it" class="btn" href="{% url support promise.id user.profile.id %}">Support promise</a></p>
-                    {% else %}
-                    <span class="label label-success">You support this.</span>
-                    {% endif %}
-                {% else %}
-                    Share your promise!
-                {% endif %}
+                {% userpromise promise %}
+                  {% owner %}
+                  Share your promise!
+                  {% supporter %}
+                  <span class="label label-success">You support this.</span>
+                  {% nothing %}
+                  <p><a title="Support it" class="btn" href="{% url support promise.id user.profile.id %}">Support promise</a></p>
+                {% enduserpromise %}
 
                 {% social promise user.profile %}
             </div>
