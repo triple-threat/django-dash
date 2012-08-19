@@ -120,8 +120,7 @@ INSTALLED_APPS = (
     'django_facebook',
     'promise',
     'util',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'gunicorn',
 )
 
 # API keys for social networks. As you see, we're using env variables
