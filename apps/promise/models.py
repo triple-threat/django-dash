@@ -43,6 +43,13 @@ class Promise(models.Model):
     def success(self):
         return self.status == 2
 
+    def supporters_ordered_by_friends(self, request):
+        supporters = self.supporter.all()
+        friends = self.creator.friends(request)
+        friend_supporters = [x for x in supporters if x in friends]
+        nonfriend_supporters = [x for x in supporters if x not in friends]
+        return friend_supporters + nonfriend_supporters
+
     @property
     def supporters(self):
         maxsupporters = 5
@@ -91,9 +98,12 @@ class Profile(FacebookProfileModel):
 
     def friends(self, request):
         fb = get_persistent_graph(request)
-        # TODO: iterate over the pagination info
-        fbids = [int(i['id']) for i in fb.get('me/friends').get('data')]
-        return Profile.objects.filter(facebook_id__in=fbids)
+        if fb:
+            # TODO: iterate over the pagination info
+            fbids = [int(i['id']) for i in fb.get('me/friends').get('data')]
+            return Profile.objects.filter(facebook_id__in=fbids)
+        else:
+            return Profile.objects.none()
 
     def wall_post(self, request, message):
         fb = get_persistent_graph(request)

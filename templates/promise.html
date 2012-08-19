@@ -41,7 +41,7 @@
       {% if promise.supporter.count %}
       <h4>{{ promise.supporter.count }} Supporters</h4>
       <ul class="unstyled">
-        {% for supporter in promise.supporter.all %}
+        {% for supporter in supporters_ordered_by_friends %}
         <li>
           <a href="#" title="{{ supporter.name }}">
             <img src="{{ supporter.avatar_square }}" alt="{{ supporter.name }}"/>

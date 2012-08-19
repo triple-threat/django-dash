@@ -115,7 +115,6 @@ class NewPromise(View):
             return new_promise
 
 
-
 class Support(View):
 
     @method_decorator(login_required)
@@ -156,9 +155,11 @@ class PromisePage(TemplateView):
     template_name = 'promise.html'
 
     def get(self, request, promise_slug):
+        promise = Promise.objects.get(slug=promise_slug)
         context = {
             'app_id': settings.FACEBOOK_APP_ID,
-            'promise': Promise.objects.get(slug=promise_slug),
+            'promise': promise,
+            'supporters_ordered_by_friends': promise.supporters_ordered_by_friends(request),
         }
         return self.render_to_response(context)
 
