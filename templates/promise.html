@@ -27,13 +27,20 @@
       <div class="supportit">
         {% userpromise promise %}
           {% owner %}
-          <div class="first">Share your promise!</div>
+          {% if promise.active %}
+          <div class="first">
+            <a href="{% url validate_promise promise.slug 2 %}" class="btn btn-primary">Succeeded</a>
+            <a href="{% url validate_promise promise.slug 3 %}" class="btn btn-primary">Didn't make it this time!</a>
+          {% else %}
+          {{ promise.status }}
+          {% endif %}
+          </div>
           {% supporter %}
           <div class="label label-success first">You support this.</div>
           {% nothing %}
           <a href="{% url support promise.id %}"
              title="Support this promise" class="btn first">
-            <i class="icon-heart"></i> 
+            <i class="icon-heart"></i>
             Support this promise
           </a>
         {% enduserpromise %}

@@ -45,6 +45,17 @@ class Home(TemplateView):
             return promises
 
 
+class ValidatePromise(View):
+    """
+    Creator of a promise verifies whether or not the promise was fulfilled.
+    """
+    def get(self, request, promise_slug, result):
+        promise = Promise.objects.get(slug=promise_slug)
+        promise.status = result
+        promise.save()
+        return HttpResponseRedirect(reverse('promise', args=[promise_slug]))
+
+
 
 class NewPromise(View):
     """
@@ -106,3 +117,4 @@ home = Home.as_view()
 new_promise = NewPromise.as_view()
 support = Support.as_view()
 promise = PromisePage.as_view()
+validate_promise = ValidatePromise.as_view()

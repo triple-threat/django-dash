@@ -35,6 +35,10 @@ class Promise(models.Model):
         return u"{}:{}".format(self.text[:15], self.creator)
 
     @property
+    def active(self):
+        return self.status == 1
+
+    @property
     def supporters(self):
         return ",".join([unicode(supporter) for supporter in self.supporter.all()])
 

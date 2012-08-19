@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
-from promise.views import home, new_promise, support, promise
+from promise.views import home, new_promise, support, promise, validate_promise
 
 admin.autodiscover()
 
@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'^support/(?P<promise_id>[\d]+)/$', support, name="support"),
     url(r'^p/(?P<promise_slug>[a-zA-Z0-9\-_]+)/', promise, name="promise"),
+    url(r'^v/(?P<promise_slug>[a-zA-Z0-9\-_]+)/(?P<result>[\d]+)/$', validate_promise, name="validate_promise"),
 )
 
 # serves the favicon.ico from the root
