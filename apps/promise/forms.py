@@ -13,16 +13,6 @@ DURATION_VALUES = ((x, x) for x in range(1, 7))
 DURATION_UNITS = (('days', 'days'), ('weeks', 'weeks'))
 
 
-# class ValidatePromiseForm(forms.Form):
-#     promise_id = forms.ModelChoiceField(queryset=Promise.objects.all())
-#     result = forms.ChoiceField(PROMISE_STATUSES)
-
-#     def process(self):
-#         Promise.objects.filter(id=self.cleaned_data['promise_id']) \
-#                 .update(status=self.cleaned_data['result'])
-#         return self.cleaned_data['promise_id']
-
-
 class NewPromiseForm(forms.Form):
     promise_text = forms.CharField()
     duration_value = forms.ChoiceField(DURATION_VALUES)
