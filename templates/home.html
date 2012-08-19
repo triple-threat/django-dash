@@ -36,7 +36,7 @@
 
                 {% if promise.supporter_count %}
 
-                <p><strong>Supporters ({{ promise.supporter_count }}):</strong> {{ promise.supporters }}</p>
+                <p><strong>Supporters ({{ promise.supporter_count }}):</strong> {{ promise.supporters|truncatewords:20 }}</p>
 
                     {% if not promise.id in already_supporting %}
 
@@ -46,12 +46,12 @@
 
                 {% else %}
 
-                <p><strong>No Supporters yet.</strong> <a title="Support it" href="{% url support promise.id user.profile.id %}">Support it</a></p>
+                <p><a title="Support it" class="btn" href="{% url support promise.id user.profile.id %}"><i class="icon-thumbs-up"></i> Support it</a></p>
 
                 {% endif %}
 
                 {% if promise.id in already_supporting %}
-                <h3>You support this.</h3>
+                <span class="label label-success">You support this.</span>
                 {% endif %}
             </div>
         </li>
