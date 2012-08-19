@@ -5,6 +5,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
 from promise.views import home, new_promise, support, promise, validate_promise
+from analytics.views import metric
+
 
 admin.autodiscover()
 
@@ -18,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^support/(?P<promise_id>[\d]+)/$', support, name="support"),
     url(r'^p/(?P<promise_slug>[a-zA-Z0-9\-_]+)/', promise, name="promise"),
     url(r'^v/(?P<promise_slug>[a-zA-Z0-9\-_]+)/(?P<result>[\d]+)/$', validate_promise, name="validate_promise"),
+    url(r'^metric/(?P<metric_name>[a-zA-Z0-9\-_]+)/(?P<hours_ago>[\d]+)/$', metric, name="metric"),
 )
 
 # serves the favicon.ico from the root
