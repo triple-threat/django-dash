@@ -5,6 +5,8 @@ from util.model_helpers import unique_slugify
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django_facebook.models import FacebookProfileModel
+from django.template.defaultfilters import urlencode
+from django.utils.safestring import mark_safe
 
 
 PROMISE_STATUSES = (
@@ -33,6 +35,29 @@ class Promise(models.Model):
     @property
     def supporter_list(self):
         return self.supporter.all()
+
+    @property
+    def facebook_url(self):
+        return u'https://www.facebook.com/sharer.php?u={}&amp;t={}'.format(
+            urlencode(self.full_url), urlencode(u"Support {}'s promise: self.text".format(self.creator)))
+
+    @property
+    def twitter_url(self):
+        return u'http://twitter.com/?status={}'.format(
+            urlencode(self.tweet_text))
+
+    @property
+    def mailto_url(self):
+
+        body = unicode("'{}' - {}").format(self.text, self.creator) + unicode("\n{}").format(urlencode(self.full_url))
+        subject = u"Support {}!".format(self.creator)
+
+        res = u'mailto:&#63;body={}&subject={}'.format(urlencode(body), urlencode(subject))
+        return mark_safe(res)
+
+    @property
+    def tweet_text(self):
+        return u"Support {}'s promise! '{}' - {}".format(urlencode(self.creator), urlencode(self.text), urlencode(self.full_url))
 
     @property
     def full_url(self):

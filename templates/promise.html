@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 {% block head_before %}
 <meta property="og:title" content="Support {{promise.creator}}"/>
-If you use Open Graph tags, the following six are required:
-
-og:title - The title of the entity.
-og:type - The type of entity. You must select a type from the list of Open Graph types.
-og:image - The URL to an image that represents the entity. Images must be at least 50 pixels by 50 pixels. Square images work best, but you are allowed to use images up to three times as wide as they are tall.
-og:url
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/211306_1104390006_3470883_n.jpg"/>
+<meta property="og:url" content="{{promise.full_url}}"/>
 {% endblock %}
 
 {% block content %}
@@ -31,8 +28,8 @@ og:url
       <span style="line-height:40px; font-size:30px"><em>"{{promise.text}}"</em></span>
     </div>
     <h4>&mdash; {{promise.creator}}</h4>
-    <h5>{{promise.deadline}}</h5>
-    <a href="http://www.facebook.com/sharer.php?u={{promise.full_url}}&t={{promise.text}}" target="_blank">Share to FB</a>
+    <h5>{{promise.created}}</h5>
+    <a href="{{promise.facebook_url}}" target="_blank"><img src="{{ STATIC_URL }}img/fb.png" style="width:20px; height:20px"/></a> <a href="{{promise.twitter_url}}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" style="width:20px; height:20px"/></a><a href="{{promise.mailto_url}}" target="_blank"><img src="{{ STATIC_URL }}img/email.png" style="width:20px; height:20px"/></a>
   </div>
   <div class="span3">
     Related promises

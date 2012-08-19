@@ -13,7 +13,7 @@ class Command(BaseCommand):
         ]
         for name in name_list:
             try:
-                user = User.objects.create_user(username=name, password='yipit345')
+                user = User.objects.create_user(username=name, password='promisely')
             except IntegrityError:
                 user = User.objects.get(username=name)
 
