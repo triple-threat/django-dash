@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
 
-from analytics.calculator import Calculator
+from analytics.calculator import MetricDataFetcher
 
 
 class MetricView(TemplateView):

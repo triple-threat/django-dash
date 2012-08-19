@@ -4,7 +4,7 @@ from util.rediz import connection
 from event.keys import key_manager
 
 
-class Calculator(object):
+class MetricDataFetcher(object):
     def __init__(self, metric_name, hours_before):
         self.metric_name = metric_name
         self.hours_before = hours_before
