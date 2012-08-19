@@ -4,12 +4,12 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
 from django_facebook.models import FacebookProfileModel
 from django.template.defaultfilters import urlencode
 from django.utils.safestring import mark_safe
 
 from util.model_helpers import unique_slugify
+from util import url_with_domain
 
 
 PROMISE_STATUSES = (
@@ -43,9 +43,7 @@ class Promise(models.Model):
         return mark_safe(res)
 
     def get_absolute_url(self):
-        domain = Site.objects.get_current().domain
-        path = reverse('promise', args=(self.slug,))
-        return u'{}{}'.format(domain, path)
+        return url_with_domain(reverse('promise', args=(self.slug,)))
 
     def save(self, *args, **kwargs):
         if not self.slug:
