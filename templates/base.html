@@ -22,12 +22,18 @@
             <div class="navbar navbar-fixed-top">
                 <div class="navbar-inner">
                     <div class="container">
-                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </a>
                         <a class="brand" title="goto Promise.ly home page" href="{% url home %}">Promise.ly</a>
+
+                        <div class="nav-collapse pull-right">
+                            <ul class="nav">
+                                <li>
+                                    <a title="Home" href="{% url home %}">Home</a>
+                                </li>
+                                <li>
+                                    <a title="Login" href="#">Login</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
