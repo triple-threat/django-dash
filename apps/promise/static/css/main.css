@@ -4253,3 +4253,9 @@ input.input-jumbo {
   margin-bottom: 18px;
   line-height: 1;
 }
+.modal.fade {
+  top: -300px;
+}
+.modal.fade.in {
+  top: 440px;
+}
