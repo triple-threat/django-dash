@@ -14,7 +14,7 @@ class EmailEngine(object):
     def send(self):
         recipients = self.get_recipients()
         # Safety check for sometimes unclean data (no email in User)
-        if not recipients:
+        if not recipients or not ''.join(recipients):
             return
 
         message = EmailMessage(
