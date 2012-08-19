@@ -26,9 +26,13 @@
 
                         <div class="nav-collapse pull-right">
                             <ul class="nav">
+                                {% if user.is_authenticated %}
                                 <li class="nav-user-avatar">
-                                    <img src="http://placehold.it/50x50" alt="username" />
+                                    <img
+                                       src="{{ user.profile.avatar_square }}"
+                                       alt="{{ user.profile.name }}">
                                 </li>
+                                {% endif %}
                                 <li>
                                     <a title="Home" href="{% url home %}">Home</a>
                                 </li>
