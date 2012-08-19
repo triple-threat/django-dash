@@ -60,4 +60,8 @@
         }
     });
 
+    // the navigation
+    // activated the home link if you are on it
+    $('.navbar a[href="'+ location.pathname +'"]').parent('li').addClass('active');
+
 }());

@@ -17,11 +17,15 @@
     }
 
     .nav {
-        > li > a:hover {
-            background-color: #CE2E2E;
-            box-shadow:
-                inset 1px 0 2px rgba(0, 0, 0, 0.2),
-                inset -1px 0 2px rgba(0, 0, 0, 0.2);
+        > li > a {
+            .transition(all 200ms);
+
+            &:hover {
+                background-color: #A72424;
+                box-shadow:
+                    inset 1px 0 2px rgba(0, 0, 0, 0.2),
+                    inset -1px 0 2px rgba(0, 0, 0, 0.2);
+            }
         }
     }
 }

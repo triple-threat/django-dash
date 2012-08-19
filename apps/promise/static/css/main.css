@@ -4300,8 +4300,15 @@ input.input-jumbo {
 .navbar .brand:active {
   padding: 9px 0 0 21px;
 }
+.navbar .nav > li > a {
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  -ms-transition: all 200ms;
+  -o-transition: all 200ms;
+  transition: all 200ms;
+}
 .navbar .nav > li > a:hover {
-  background-color: #CE2E2E;
+  background-color: #A72424;
   box-shadow: inset 1px 0 2px rgba(0, 0, 0, 0.2), inset -1px 0 2px rgba(0, 0, 0, 0.2);
 }
 .share-navbar {
