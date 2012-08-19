@@ -9,11 +9,7 @@
 
         {{ form.non_field_errors }}
 
-        {{ form.text|htmlattributes:'class="input-jumbo" placeholder="I\'ll lose 2 pounds in the next two weeks."' }}
-
-        <div class="hide">
-        {{ form.deadline }}
-        </div>
+        {{ form.promise_text|htmlattributes:'class="visible-promise-input input-jumbo" autofocus="autofocus" placeholder="I\'ll lose 2 pounds in the next two weeks."' }}
 
         <button type="submit" class="btn btn-primary btn-large promise-button">I Promise!</button>
     </form>
@@ -53,36 +49,31 @@
     {% endif %}
 
       <div id="promise-modal" class="modal hide fade">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h3>We believe in you! You're going to make it!</h3>
-        </div>
-        <div class="modal-body">
-          <h4>Set a deadline</h4>
+        <form method="POST" action="{% url new_promise %}">
+            {% csrf_token %}
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h3>We believe in you! You're going to make it!</h3>
+            </div>
+            <div class="modal-body">
+              <h4>Set a deadline</h4>
 
-          <select id="promise-duration-value" class="span1">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-          </select>
+              <div class="hide">
+              {{ form.promise_text|htmlattributes:'class="invisible-promise-input"' }}
+              </div>
+              {{ form.duration_value|htmlattributes:'class="span1"' }}
+              {{ form.duration_unit|htmlattributes:'class="span2"' }}
 
-          <select id="promise-duration-unit" class="span2">
-            <option value="1">days</option>
-            <option value="2">weeks</option>
-          </select>
+              <hr>
 
-          <hr>
+              <h4>Share on facebook</h4>
+              <label><input type="checkbox" checked="checked"/> Share my promise with my friends</label>
 
-          <h4>Share on facebook</h4>
-          <label><input type="checkbox" checked="checked"/> Share my promise with my friends</label>
-
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn btn-primary">Make the promise!</a>
-        </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Make the promise!</button>
+            </div>
+        </form>
       </div>
 
 {% endblock %}

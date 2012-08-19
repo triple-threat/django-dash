@@ -9,15 +9,26 @@ class LoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(max_length=128, widget=forms.PasswordInput)
 
+DURATION_VALUES = ((x, x) for x in range(1,7))
+DURATION_UNITS = (('days', 'days'), ('weeks', 'weeks'))
+
+
 
 class NewPromiseForm(forms.Form):
-    text = forms.CharField()
-    deadline = forms.DateField(initial=datetime.datetime.today)
+    promise_text = forms.CharField()
+    duration_value = forms.ChoiceField(DURATION_VALUES)
+    duration_unit = forms.ChoiceField(DURATION_UNITS)
+
 
     def process(self, request):
+        timedelta_args = {
+            self.cleaned_data['duration_unit']: int(self.cleaned_data['duration_value']),
+        }
+        import ipdb; ipdb.set_trace()
+        deadline = datetime.datetime.now() + datetime.timedelta(**timedelta_args)
         promise = Promise(
-            text=self.cleaned_data['text'],
-            deadline=self.cleaned_data['deadline'],
+            text=self.cleaned_data['promise_text'],
+            deadline=deadline,
             creator=request.user.profile,
         )
         promise.save()

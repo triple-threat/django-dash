@@ -11,15 +11,15 @@
     };
 
     var weekMap = {
-        day: 1,
-        week: 2
+        day: 'days',
+        week: 'weeks'
     };
 
     // the promise form
     $('.promise-form').submit(function(e) {
         e.preventDefault();
 
-        var promiseInput = $('#id_text'),
+        var promiseInput = $('.visible-promise-input'),
             promise = promiseInput.val();
 
         if (promise) {
@@ -38,12 +38,15 @@
                 }
 
                 if (value && value < 7) {
-                    $('#promise-duration-value').val(value);
+                    $('#id_duration_value').val(value);
                 }
 
                 unit = unit.toLowerCase();
-                $('#promise-duration-unit').val(weekMap[unit]);
+                $('#id_duration_unit').val(weekMap[unit]);
+
+
             }
+            $('.invisible-promise-input').val(promise);
 
             $('#promise-modal').modal('show');
         } else {
