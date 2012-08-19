@@ -6,7 +6,6 @@ from promise.models import Profile, Promise
 
 
 class EmailEngine(object):
-
     from_address = "Promise.ly <notifications@promise.ly>"
 
     def render(self):
@@ -28,17 +27,16 @@ class EmailEngine(object):
         message.content_subtype = "html"
         message.send()
 
+    def get_recipients(self):
+        return [self.promise.creator.user.email]
+
 
 class NewSupporterEngine(EmailEngine):
-
     template = 'emailer/new_supporter.html'
 
     def __init__(self, supporter_id, promise_id):
         self.supporter = Profile.objects.get(id=supporter_id)
         self.promise = Promise.objects.get(id=promise_id)
-
-    def get_recipients(self):
-        return [self.promise.creator.user.email]
 
     def get_context(self):
         return {
@@ -48,3 +46,18 @@ class NewSupporterEngine(EmailEngine):
 
     def make_subject_line(self):
         return u"You have a new supporter!"
+
+
+class DeadlineReminderEngine(EmailEngine):
+    template = 'emailer/deadline.html'
+
+    def __init__(self, promise_id):
+        self.promise = Promise.objects.get(id=promise_id)
+
+    def get_context(self):
+        return {
+            'promise': self.promise,
+        }
+
+    def make_subject_line(self):
+        return u"Your promise deadline is almost up!"
