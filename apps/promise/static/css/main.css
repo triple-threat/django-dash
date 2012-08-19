@@ -4325,6 +4325,14 @@ input.input-jumbo {
   background-color: #A72424;
   box-shadow: inset 1px 0 2px rgba(0, 0, 0, 0.2), inset -1px 0 2px rgba(0, 0, 0, 0.2);
 }
+.nav-user-avatar {
+  padding: 5px;
+}
+.nav-user-avatar img {
+  border-radius: 2px;
+  width: 30px;
+  height: 30px;
+}
 .share-navbar {
   display: inline-block;
 }
@@ -4359,6 +4367,10 @@ body {
   margin: 20px 0 40px 23px;
   text-align: left;
   color: #444;
+}
+.t-home .promise-form-help-text {
+  color: #999999;
+  margin-left: 10px;
 }
 .t-home .feed-tabs {
   margin-bottom: 0;
