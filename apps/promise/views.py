@@ -3,7 +3,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.shortcuts import render
-
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from promise.forms import NewPromiseForm
 from promise.models import Promise, Profile
@@ -17,10 +18,8 @@ class Home(TemplateView):
     template_name = 'home.html'
     ajax_template_name = 'ajax_home.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        return super(Home, self).dispatch(request, *args, **kwargs)
-
     def get(self, request, *args, **kwargs):
+        print 'Anonymous? ', request.user.is_anonymous()
         context = {
             'promises': self.get_promises(),
         }
@@ -61,14 +60,30 @@ class NewPromise(View):
     """
     Creates a new promise
     """
+    def dispatch(self, request, *args, **kwargs):
+        # We'll have to redirect the user to the facebook oauth
+        # flow. Let's store promise data to avoid the need of typing it
+        # all over again.
+        data = request.POST.copy()
+        if data:
+            request.session['_delayed_save'] = request.POST.copy()
+        return super(NewPromise, self).dispatch(request, *args, **kwargs)
+
     def get(self, request):
+        if '_delayed_save' in request.session:
+            self.save_promise(request.session.pop('_delayed_save'))
         return HttpResponseRedirect(reverse('home'))
 
+    @method_decorator(login_required)
     def post(self, request):
-        form = NewPromiseForm(request.POST)
+        self.save_promise(request.POST)
+        return HttpResponseRedirect(reverse('home'))
+
+    def save_promise(self, data):
+        form = NewPromiseForm(data)
         if form.is_valid():
-            new_promise = form.process(request)
-            key = get_promise_key(request.user.profile.id)
+            new_promise = form.process(self.request)
+            key = get_promise_key(self.request.user.profile.id)
             redis_connection.lpush(key, new_promise.id)
 
             # Logging stuff
@@ -76,10 +91,14 @@ class NewPromise(View):
                 'creator_id': new_promise.creator.id,
                 'promise_id': new_promise.id,
             })
-        return HttpResponseRedirect(reverse('home'))
+
 
 
 class Support(View):
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(Support, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, promise_id, next_url=None):
         """

@@ -3,24 +3,10 @@
     <title>Login</title>
   </head>
   <body>
-    <form method="post" id="login" action="{% url django.contrib.auth.views.login %}">
-      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-      <input type="hidden" value="{{ next }}" name="next">
-
-      <label for="email">Email address</label>
-      {{ form.username }}
-
-      <label for="password">{{ form.password.label_tag }}</label>
-      {{ form.password }}
-
-      <input type="submit" value="Login">
-    </form>
-
-    <form method="post" id="fblogin" action="{% url facebook_connect %}?facebook_login=1">
-      <input
-         type="hidden" name="redirect_url"
-         value="{% if next %}{{ next }}{% else %}/{% endif %}">
-      <input type="submit" value="Login via facebook">
+    <form
+       method="post" id="fblogin"
+       action="{% url facebook_connect %}?facebook_login=1&next={% if next %}{{ next }}{% else %}/{% endif %}&registration_next={% if next %}{{ next }}{% else %}/{% endif %}">
+      <script>document.forms[0].submit();</script>
     </form>
   </body>
 </html>

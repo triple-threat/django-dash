@@ -31,7 +31,11 @@
                                 </li>
                                 {% if not user.is_authenticated %}
                                 <li>
-                                    <a title="Login" href="#">Login</a>
+                                    {% if user.is_anonymous %}
+                                    <a title="Login" href="{% url login %}">Login</a>
+                                    {% else %}
+                                    <a title="Logout" href="{% url logout %}">Logout</a>
+                                    {% endif %}
                                 </li>
                                 {% endif %}
                             </ul>
