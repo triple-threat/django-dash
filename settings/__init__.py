@@ -121,6 +121,9 @@ INSTALLED_APPS = (
     'promise',
     'util',
     'gunicorn',
+    'emailer',
+    'analytics',
+    'event',
 )
 
 # API keys for social networks. As you see, we're using env variables
