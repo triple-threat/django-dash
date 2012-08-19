@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
-from promise.views import home, new_promise, support, profile, promise
+from promise.views import home, new_promise, support, promise
 
 admin.autodiscover()
 
@@ -16,7 +16,6 @@ urlpatterns = patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'^support/(?P<promise_id>[\d]+)/(?:(?P<supporter_id>[\d]+)/)?$', support, name="support"),
-    url(r'^profile/(?P<username>[a-zA-Z0-9\-_]+)/', profile, name="profile"),
     url(r'^p/(?P<promise_slug>[a-zA-Z0-9\-_]+)/', promise, name="promise"),
 )
 

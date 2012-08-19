@@ -13,11 +13,16 @@ class EmailEngine(object):
         return render_to_string(self.template, self.get_context())
 
     def send(self):
+        recipients = self.get_recipients()
+        # Safety check for sometimes unclean data (no email in User)
+        if not recipients:
+            return
+
         message = EmailMessage(
             self.make_subject_line(),
             self.render(),
             self.from_address,
-            self.get_recipients(),
+            recipients,
             headers={'Reply-To': self.from_address}
         )
         message.content_subtype = "html"
