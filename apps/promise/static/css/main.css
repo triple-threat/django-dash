@@ -140,11 +140,11 @@ body {
   background-color: #ffffff;
 }
 a {
-  color: #0088cc;
+  color: #b81f1f;
   text-decoration: none;
 }
 a:hover {
-  color: #005580;
+  color: #771414;
   text-decoration: underline;
 }
 .row {
@@ -1999,7 +1999,7 @@ table .span24 {
 .dropdown-menu .active > a:hover {
   color: #ffffff;
   text-decoration: none;
-  background-color: #0088cc;
+  background-color: #b81f1f;
 }
 .open {
   *z-index: 1000;
@@ -2256,18 +2256,18 @@ button.close {
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 .btn-primary {
-  background-color: #0074cc;
-  background-image: -moz-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -ms-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0055cc));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -o-linear-gradient(top, #0088cc, #0055cc);
-  background-image: linear-gradient(top, #0088cc, #0055cc);
+  background-color: #b82e1f;
+  background-image: -moz-linear-gradient(top, #b81f1f, #b8451f);
+  background-image: -ms-linear-gradient(top, #b81f1f, #b8451f);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b81f1f), to(#b8451f));
+  background-image: -webkit-linear-gradient(top, #b81f1f, #b8451f);
+  background-image: -o-linear-gradient(top, #b81f1f, #b8451f);
+  background-image: linear-gradient(top, #b81f1f, #b8451f);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
-  border-color: #0055cc #0055cc #003580;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b81f1f', endColorstr='#b8451f', GradientType=0);
+  border-color: #b8451f #b8451f #772d14;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #0055cc;
+  *background-color: #b8451f;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -2277,12 +2277,12 @@ button.close {
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #0055cc;
-  *background-color: #004ab3;
+  background-color: #b8451f;
+  *background-color: #a23d1b;
 }
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #004099 \9;
+  background-color: #8c3518 \9;
 }
 .btn-warning {
   background-color: #faa732;
@@ -2569,7 +2569,7 @@ input[type="submit"].btn.btn-mini {
   background-color: #e6e6e6;
 }
 .btn-group.open .btn-primary.dropdown-toggle {
-  background-color: #0055cc;
+  background-color: #b8451f;
 }
 .btn-group.open .btn-warning.dropdown-toggle {
   background-color: #f89406;
@@ -2715,7 +2715,7 @@ input[type="submit"].btn.btn-mini {
 .nav-list > .active > a:hover {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
-  background-color: #0088cc;
+  background-color: #b81f1f;
 }
 .nav-list [class^="icon-"] {
   margin-right: 2px;
@@ -2793,7 +2793,7 @@ input[type="submit"].btn.btn-mini {
 .nav-pills > .active > a,
 .nav-pills > .active > a:hover {
   color: #ffffff;
-  background-color: #0088cc;
+  background-color: #b81f1f;
 }
 .nav-stacked > li {
   float: none;
@@ -2842,14 +2842,14 @@ input[type="submit"].btn.btn-mini {
 }
 .nav-tabs .dropdown-toggle .caret,
 .nav-pills .dropdown-toggle .caret {
-  border-top-color: #0088cc;
-  border-bottom-color: #0088cc;
+  border-top-color: #b81f1f;
+  border-bottom-color: #b81f1f;
   margin-top: 6px;
 }
 .nav-tabs .dropdown-toggle:hover .caret,
 .nav-pills .dropdown-toggle:hover .caret {
-  border-top-color: #005580;
-  border-bottom-color: #005580;
+  border-top-color: #771414;
+  border-bottom-color: #771414;
 }
 .nav-tabs .active .dropdown-toggle .caret,
 .nav-pills .active .dropdown-toggle .caret {
@@ -3770,7 +3770,7 @@ input[type="submit"].btn.btn-mini {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 a.thumbnail:hover {
-  border-color: #0088cc;
+  border-color: #b81f1f;
   -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
   -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
   box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
@@ -4198,6 +4198,12 @@ a.badge:hover {
 .invisible {
   visibility: hidden;
 }
+/*overwrites some of the bootstrap variables*/
+.footer {
+  padding: 10px 0 4px;
+  margin-top: 10px;
+  border-top: 2px solid #ccc;
+}
 .footer strong {
   color: #bd362f;
 }
@@ -4231,4 +4237,15 @@ a.badge:hover {
 }
 .promise-content {
   margin-left: 100px;
+}
+input.input-jumbo {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 26px;
+  padding: 32px 20px 26px 20px;
+  line-height: 1;
+  width: 100%;
+  margin-bottom: 18px;
 }

@@ -12,11 +12,13 @@
 
         {{ form.non_field_errors }}
 
-        {{ form.text|htmlattributes:'placeholder="Your promise, for example: I\'ll lose 3 pounds till next week"' }}
+        {{ form.text|htmlattributes:'class="input-jumbo" placeholder="Type your promise, for example: I\'ll lose 3 pounds untill next week."' }}
 
+        {% comment %}
         {{ form.deadline }}
+        {% endcomment %}
 
-        <button type="submit" class="btn btn-primary">I Promise!</button>
+        <button type="submit" class="btn btn-primary btn-large">I Promise!</button>
     </form>
 
     {% if promises %}
