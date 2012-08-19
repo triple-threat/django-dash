@@ -4244,9 +4244,14 @@ a.badge:hover {
   width: 80px;
   padding: 1px;
   border: 1px #b81f1f solid;
+  background-color: #f6c7c7;
 }
 .promise-content {
   margin-left: 104px;
+}
+.promise-small .share-navbar-link img {
+  width: 20px;
+  height: 20px;
 }
 input.input-jumbo {
   -webkit-box-sizing: border-box;
@@ -4330,10 +4335,15 @@ body {
   background: url(../img/body_bg.png) repeat;
 }
 .avatarbox {
-  width: 180px;
-  height: 200px;
   overflow: hidden;
   margin-bottom: 20px;
+}
+.avatarbox img {
+  width: 180px;
+  height: 180px;
+  border: 1px solid #b81f1f;
+  padding: 1px;
+  background-color: #f6c7c7;
 }
 .supporters h4 {
   padding-bottom: 10px;
@@ -4356,14 +4366,16 @@ body {
   line-height: 40px;
   font-size: 30px;
   font-style: italic;
+  font-weight: 200;
 }
 .promiseinfo .creator {
-  padding: 10px 0;
+  margin-bottom: 10px;
   font-weight: bold;
 }
 .followup {
   clear: both;
-  margin-top: 80px;
+  margin: 0 auto;
+  width: 470px;
 }
 .followup h4 {
   margin-bottom: 20px;

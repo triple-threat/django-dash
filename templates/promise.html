@@ -26,6 +26,7 @@
           {% if promise.id not in already_supporting %}
           <a href="{% url support promise.id user.profile.id %}"
              title="Support this promise" class="btn first">
+            <i class="icon-heart"></i> 
             Support this promise
           </a>
           {% else %}
@@ -36,6 +37,7 @@
         {% endif %}
       </div>
 
+      {% if promise.supporter.count %}
       <h4>{{ promise.supporter.count }} Supporters</h4>
       <ul class="unstyled">
         {% for supporter in promise.supporter.all %}
@@ -46,25 +48,25 @@
         </li>
         {% endfor %}
       </ul>
+      {% endif %}
+
     </div>
   </div>
   <div class="span9">
-    <ul class="promiseinfo unstyled">
-      <li class="text">{{ promise.text }}</li>
-      <li class="creator">&mdash; {{ promise.creator }}</li>
-      <li class="created">{{ promise.created }}</li>
-    </ul>
-
-    {% social promise user.profile %}
-
-    <div class="followup">
-      <h4>Want to follow up this promise?</h4>
-      <div
-         class="fb-comments" data-href="{{ promise.get_absolute_url }}"
-         data-num-posts="4" data-width="470"></div>
+    <div class="promiseinfo unstyled">
+      <blockquote class="text">{{ promise.text }}</blockquote>
+      <p><i class="icon-user"></i> {{ promise.creator }}</p>
+      <p><i class="icon-time"></i> {{ promise.deadline|timeuntil }} left</p>
     </div>
 
+    {% social promise user.profile %}
   </div>
+
+</div>
+
+<div class="followup">
+  <h4>Want to follow up this promise?</h4>
+  <div class="fb-comments" data-href="{{ promise.get_absolute_url }}" data-num-posts="4" data-width="470"></div>
 </div>
 
 {% endblock %}

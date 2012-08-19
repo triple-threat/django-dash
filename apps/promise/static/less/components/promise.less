@@ -28,9 +28,17 @@
         width: @p-promise-image-width;
         padding: @p-promise-image-padding-width;
         border: @p-promise-image-border-width @linkColor solid;
+        background-color: @lighterLinkColor;
     }
 }
 
 .promise-content {
     margin-left: @p-promise-image-width + (2 * @p-promise-image-padding-width) + (2 * @p-promise-image-border-width) + 20;
+}
+
+.promise-small {
+    .share-navbar-link img {
+        width: 20px;
+        height: 20px;
+    }
 }

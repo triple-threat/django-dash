@@ -17,7 +17,7 @@
     {% if promises %}
     <ul class="unstyled">
     {% for promise in promises %}
-        <li class="promise">
+        <li class="promise promise-small">
             <div class="promise-image">
                 <img src="{{ promise.creator.avatar }}" alt="Avatar from {{ promise.creator }}">
             </div>
@@ -25,7 +25,7 @@
             <div class="promise-content">
                 <p><strong>{{ promise.creator }}</strong> promised:</p>
                 <blockquote><a href="{% url promise promise.slug %}">{{ promise.text }}</a></blockquote>
-                <p><strong><i class="icon-time"></i> Deadline:</strong> {{ promise.deadline|timeuntil }}</p>
+                <p><i class="icon-time"></i> {{ promise.deadline|timeuntil }} left</p>
 
                 {% if promise.supporter_count %}
 

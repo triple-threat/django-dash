@@ -1,8 +1,13 @@
 .avatarbox {
-    width: 180px;
-    height: 200px;
     overflow: hidden;
     margin-bottom: 20px;
+
+    img {
+        .square(180px);
+        border: 1px solid @linkColor;
+        padding: 1px;
+        background-color: @lighterLinkColor;
+    }
 }
 
 .supporters {
@@ -32,17 +37,20 @@
         line-height: 40px;
         font-size: 30px;
         font-style: italic;
+        font-weight: 200;
     }
 
     .creator {
-        padding: 10px 0;
+        margin-bottom: 10px;
         font-weight: bold;
     }
 }
 
 .followup {
     clear: both;
-    margin-top: 80px;
+    margin: 0 auto;
+    width: 470px;
+
     h4 {
         margin-bottom: 20px;
     }
