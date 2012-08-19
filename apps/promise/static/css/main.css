@@ -4407,7 +4407,7 @@ body {
 }
 .followup {
   clear: both;
-  margin: 0 auto;
+  padding-top: 40px;
   width: 470px;
 }
 .followup h4 {

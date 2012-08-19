@@ -96,12 +96,11 @@
       {% enduserpromise %}
     {% endif %}
 
+    <div class="followup">
+      <h4>Want to follow up this promise?</h4>
+      <div class="fb-comments" data-href="{{ promise.get_absolute_url }}" data-num-posts="4" data-width="470"></div>
+    </div>
 
-</div>
-
-<div class="followup">
-  <h4>Want to follow up this promise?</h4>
-  <div class="fb-comments" data-href="{{ promise.get_absolute_url }}" data-num-posts="4" data-width="470"></div>
 </div>
 
 {% endblock %}
