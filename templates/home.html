@@ -39,18 +39,16 @@
 
                 <p><strong>Supporters ({{ promise.supporter_count }}):</strong> {{ promise.supporters|truncatewords:20 }}</p>
                 {% endif %}
-
-                    {% if not promise.id in already_supporting %}
-
-
-
-                <p><a title="Support it" class="btn" href="{% url support promise.id user.profile.id %}">Support promise</a></p>
-
+                {% if promise.id not in my_promises %}
+                    {% if promise.id not in already_supporting %}
+                        <p><a title="Support it" class="btn" href="{% url support promise.id user.profile.id %}">Support promise</a></p>
+                    {% else %}
+                    <span class="label label-success">You support this.</span>
+                    {% endif %}
                 {% else %}
-
-                <span class="label label-success">You support this.</span>
+                    Share your promise!
                 {% endif %}
-                    <span style="float:right"><a href="{{promise.facebook_url}}" target="_blank"><img src="{{ STATIC_URL }}img/fb.png" style="width:20px; height:20px"/></a> <a href="{{promise.twitter_url}}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" style="width:20px; height:20px"/></a></span>
+                <span style="float:right"><a href="{{promise.facebook_url}}" target="_blank"><img src="{{ STATIC_URL }}img/fb.png" style="width:20px; height:20px"/></a> <a href="{{promise.twitter_url}}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" style="width:20px; height:20px"/></a></span>
             </div>
         </li>
     {% endfor %}

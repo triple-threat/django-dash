@@ -21,3 +21,4 @@ class NewPromiseForm(forms.Form):
             creator=request.user.profile,
         )
         promise.save()
+        return promise
