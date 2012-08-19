@@ -14,4 +14,8 @@ def get_promise_key(profile_id):
 
 
 def get_ids_from_redis(key):
-    return [int(x) for x in connection.lrange(key, 0, -1)]
+    ids = connection.lrange(key, 0, -1)
+    if ids:
+        return [int(x) for x in ids]
+    else:
+        return []

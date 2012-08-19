@@ -1,0 +1,7 @@
+Good news, {{ promise.creator.facebook_name }}!
+
+You have a new supporter: {{ supporter.facebook_name }}.
+
+Good luck keeping that promise! We all support you :)
+
+ - The Promise.ly Team

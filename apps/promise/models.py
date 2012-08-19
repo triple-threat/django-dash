@@ -11,6 +11,8 @@ from django.utils.safestring import mark_safe
 from util.model_helpers import unique_slugify
 from util import url_with_domain
 
+from event.logging import logger
+
 
 PROMISE_STATUSES = (
     (1, "In Progress"),
@@ -85,4 +87,5 @@ class Profile(FacebookProfileModel):
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+        logger.log('signup')
 post_save.connect(create_profile, sender=User)

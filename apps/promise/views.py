@@ -10,6 +10,8 @@ from promise.models import Promise, Profile
 from util.rediz import get_support_key, get_promise_key, \
     get_ids_from_redis, connection as redis_connection
 
+from event.logging import logger
+
 
 class BasePromiseView(TemplateView):
 
@@ -34,7 +36,6 @@ class Home(BasePromiseView):
         return super(Home, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        profile_id = self.request.user.profile.id
         context = self.default_context
         context.update({
             'promises': Promise.objects.order_by('-id'),
@@ -53,6 +54,9 @@ def new_promise(request):
             new_promise = form.process(request)
             key = get_promise_key(request.user.profile.id)
             redis_connection.lpush(key, new_promise.id)
+
+            logger.log('promise', data={'creator_id': new_promise.creator.id, 'promise_id': new_promise.id})
+
     return HttpResponseRedirect(reverse('home'))
 
 
@@ -66,6 +70,9 @@ class Support(View):
         if supporter != promise.creator and supporter not in promise.supporter.all():
             promise.supporter.add(supporter)
             self.update_redis(promise.id)
+
+            logger.log('support', data={'supporter_id': supporter.id, 'promise_id': promise.id})
+
         return HttpResponseRedirect(reverse('home'))
 
     def update_redis(self, promise_id):

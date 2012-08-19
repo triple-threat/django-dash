@@ -41,22 +41,26 @@ class Logger(object):
         timestamp = datetime.datetime.now()
         self.increment(get_key(timestamp))
 
-    def log_signup(self):
+    def log(self, logger, data={}):
+        handler = getattr(self, "log_{}".format(logger))
+        handler(data)
+
+    def log_signup(self, data):
         self.redis_log(self.keys.get_signup_key)
 
-    def log_support(self, supporter_id, promise_id):
+    def log_support(self, data):
         self.redis_log(self.keys.get_support_key)
 
-    def log_fb_share(self, profile_id):
+    def log_fb_share(self, data):
         self.redis_log(self.keys.get_fb_share_key)
 
-    def log_twitter_share(self, profile_id):
+    def log_twitter_share(self, data):
         self.redis_log(self.keys.get_twitter_share_key)
 
-    def log_poke(self, poker_id, poked_id, promise_id):
+    def log_poke(self, data):
         self.redis_log(self.keys.get_poke_key)
 
-    def log_promise(self, creator_id, promise_id):
+    def log_promise(self, data):
         self.redis_log(self.keys.get_promise_key)
 
 logger = Logger()
