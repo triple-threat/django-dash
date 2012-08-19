@@ -20,7 +20,9 @@ When the deadline of your promise is near, you will be notified so you can valid
 * Postgres
 * Django-facebook for facebook auth and posting
 * Heroku chronograph for email notifications and promise expiration
-
+* Less
+* Highcharts JS for metric analytics display
+* Twitter Bootstrap
 
 # How to run it locally
 
