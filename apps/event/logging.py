@@ -2,6 +2,8 @@ import datetime
 
 from util.rediz import connection
 
+from emailer.tasks import send_support_email
+
 
 class RedisKeyManager(object):
 
@@ -50,6 +52,9 @@ class Logger(object):
 
     def log_support(self, data):
         self.redis_log(self.keys.get_support_key)
+        supporter_id = data.get('supporter_id')
+        promise_id = data.get('promise_id')
+        send_support_email(supporter_id, promise_id)
 
     def log_fb_share(self, data):
         self.redis_log(self.keys.get_fb_share_key)
