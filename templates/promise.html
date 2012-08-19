@@ -18,11 +18,17 @@
     <div class="avatarbox" style="" >
       <img alt="{{ promise.creator.name }}" src="{{ promise.creator.avatar }}">
     </div>
-    <div>
+    <div class="supporters">
       <h4>{{ promise.supporter.count }} Supporters</h4>
-      {% for supporter in promise.supporter.all %}
-      <img src="http://placehold.it/50x50">
-      {% endfor %}
+      <ul class="unstyled">
+        {% for supporter in promise.supporter.all %}
+        <li>
+          <a href="#" title="{{ supporter.name }}">
+            <img src="{{ supporter.avatar_square }}" alt="{{ supporter.name }}">
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
     </div>
   </div>
   <div class="span6">
