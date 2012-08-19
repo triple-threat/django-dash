@@ -1,8 +1,5 @@
 # Django settings for promisely project.
-import sys
 import os
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'apps'))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
