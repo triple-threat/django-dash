@@ -56,8 +56,17 @@
   <div class="span9">
     <div class="promiseinfo unstyled">
       <blockquote class="text">{{ promise.text }}</blockquote>
+
       <p><i class="icon-user"></i> {{ promise.creator }}</p>
+      {% if not promise.active %}
+        {% if promise.success %}
+        <span class="label label-success">succeeded</span>
+        {% else %}
+        <span class="label label-important">didn't achieve it</span>
+        {% endif %}
+      {% else %}
       <p><i class="icon-time"></i> {{ promise.deadline|timeuntil }} left</p>
+      {% endif %}
     </div>
 
     {% social promise user.profile %}
@@ -73,27 +82,6 @@
           {% supporter %}
           {% nothing %}
         {% enduserpromise %}
-    {% else %}
-      {% userpromise promise %}
-        {% owner %}
-          {% if promise.status == 2 %}
-            <h4>You achieved this promise! Share the good news!</h4>
-          {% else %}
-            <h4>You didn't achieve the promise this time.</h4>
-          {% endif %}
-        {% supporter %}
-          {% if promise.status == 2 %}
-            <h4>{{ promise.creator.name }} achieved this promise! Share the good news!</h4>
-          {% else %}
-            <h4>{{ promise.creator.name }} didn't achieve the promise this time.</h4>
-          {% endif %}
-        {% nothing %}
-          {% if promise.status == 2 %}
-            <h4>{{ promise.creator.name }} achieved this promise! Share the good news!</h4>
-          {% else %}
-            <h4>{{ promise.creator.name }} didn't achieve the promise this time.</h4>
-          {% endif %}
-      {% enduserpromise %}
     {% endif %}
 
     <div class="followup">
