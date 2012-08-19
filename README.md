@@ -12,8 +12,8 @@ When the deadline of your promise is near, you will be notified so you can valid
 * Filter promise feed by your promises, your supported promises, your friends' promises
 * Monitor core metrics through a custom metrics logging system, powered by Redis
 * Share your promises and the promises you support via Facebook and Twitter
-* Enter promises using natural language, since the form uses naive natural language processing to parse '2 weeks' from 'I want to learn yoga in 2 weeks' to autopopulate the deadline select fields in the form.
-* Receive email notifications when you get a supporter or a comment or when the deadline is near, you get a reminder.
+* Enter promises using natural language, since the form uses naive natural language processing, i.e. it parses '2 weeks' from 'I want to learn yoga in 2 weeks' to autopopulate the deadline select fields in the form.
+* Receive email notifications through the custom email engine when you get a supporter or a comment or when the deadline is near, you get a reminder.
 
 # Technologies Used
 * Redis for powering metrics logging and storing often accessed data like a user's promises and which promises the user supports.
