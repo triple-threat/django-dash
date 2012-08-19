@@ -15,6 +15,22 @@
       <img alt="{{ promise.creator.name }}" src="{{ promise.creator.avatar }}">
     </div>
     <div class="supporters">
+
+      <div class="supportit">
+        {% if promise.id not in my_promises %}
+          {% if promise.id not in already_supporting %}
+          <a href="{% url support promise.id user.profile.id %}"
+             title="Support this promise" class="btn first">
+            Support this promise
+          </a>
+          {% else %}
+          <div class="label label-success first">You support this.</div>
+          {% endif %}
+        {% else %}
+          <div class="first">Share your promise!</div>
+        {% endif %}
+      </div>
+
       <h4>{{ promise.supporter.count }} Supporters</h4>
       <ul class="unstyled">
         {% for supporter in promise.supporter.all %}

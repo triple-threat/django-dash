@@ -15,7 +15,22 @@ from util.rediz import get_support_key, get_promise_key, \
     get_ids_from_redis, connection as redis_connection
 
 
-class Home(TemplateView):
+class BasePromiseView(TemplateView):
+
+    @property
+    def default_context(self):
+        promise_key = get_promise_key(self.request.user.profile.id)
+        support_key = get_support_key(self.request.user.profile.id)
+        context = {
+            'already_supporting': get_ids_from_redis(support_key),
+            'my_promises': get_ids_from_redis(promise_key),
+        }
+
+        copy = context.copy()
+        return copy
+
+
+class Home(BasePromiseView):
     template_name = 'home.html'
 
     @method_decorator(login_required)
@@ -23,29 +38,13 @@ class Home(TemplateView):
         return super(Home, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        self.profile_id = self.request.user.profile.id
-        context = {
+        profile_id = self.request.user.profile.id
+        context = self.default_context
+        context.update({
             'promises': Promise.objects.order_by('-id'),
             'form': NewPromiseForm(),
-            'already_supporting': self.get_promises_i_already_support(),
-            'my_promises': self.get_my_promises(),
-        }
+        })
         return self.render_to_response(context)
-
-    def get_my_promises(self):
-        """
-        Gets list of promise_ids corresponding to this user's own promises.
-        """
-        key = get_promise_key(self.profile_id)
-        return get_ids_from_redis(key)
-
-    def get_promises_i_already_support(self):
-        """
-        Fetches from Redis a list of promise_ids that this user
-        already supports.
-        """
-        key = get_support_key(self.request.user.profile.id)
-        return get_ids_from_redis(key)
 
 
 def new_promise(request):
@@ -81,12 +80,15 @@ class Support(View):
         redis_connection.lpush(key, promise_id)
 
 
-class PromisePage(TemplateView):
+class PromisePage(BasePromiseView):
     template_name = 'promise.html'
 
     def get(self, request, promise_slug):
-        promise = Promise.objects.get(slug=promise_slug)
-        return self.render_to_response({'promise': promise})
+        context = self.default_context
+        context.update({
+            'promise': Promise.objects.get(slug=promise_slug),
+        })
+        return self.render_to_response(context)
 
 
 class ProfilePage(TemplateView):
