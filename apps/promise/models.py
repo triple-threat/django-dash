@@ -44,7 +44,7 @@ class Promise(models.Model):
     @property
     def twitter_url(self):
         return u'http://twitter.com/?status={}'.format(
-            urlencode(self.tweet_text))
+            self.tweet_text)
 
     @property
     def mailto_url(self):
@@ -57,7 +57,7 @@ class Promise(models.Model):
 
     @property
     def tweet_text(self):
-        return u"Support {}'s promise! '{}' - {}".format(urlencode(self.creator), urlencode(self.text), urlencode(self.full_url))
+        return u"Support {}'s promise! '{}' - {}".format(self.creator.facebook_name or self.creator, self.text, self.full_url)
 
     @property
     def full_url(self):

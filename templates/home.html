@@ -14,9 +14,9 @@
 
         {{ form.text|htmlattributes:'class="input-jumbo" placeholder="Type your promise, for example: I\'ll lose 3 pounds untill next week."' }}
 
-        {% comment %}
+        <div style="display:none">
         {{ form.deadline }}
-        {% endcomment %}
+        </div>
 
         <button type="submit" class="btn btn-primary btn-large">I Promise!</button>
     </form>
@@ -36,23 +36,21 @@
 
                 {% if promise.supporter_count %}
 
-                <p><strong><i class="icon-thumbs-up"></i> Supporters ({{ promise.supporter_count }}):</strong> {{ promise.supporters|truncatewords:20 }}</p>
+
+                <p><strong>Supporters ({{ promise.supporter_count }}):</strong> {{ promise.supporters|truncatewords:20 }}</p>
+                {% endif %}
 
                     {% if not promise.id in already_supporting %}
 
-                    <a title="Support" href="{% url support promise.id user.profile.id %}">Support</a>
 
-                    {% endif %}
-
-                {% else %}
 
                 <p><a title="Support it" class="btn" href="{% url support promise.id user.profile.id %}">Support promise</a></p>
 
-                {% endif %}
+                {% else %}
 
-                {% if promise.id in already_supporting %}
                 <span class="label label-success">You support this.</span>
                 {% endif %}
+                    <span style="float:right"><a href="{{promise.facebook_url}}" target="_blank"><img src="{{ STATIC_URL }}img/fb.png" style="width:20px; height:20px"/></a> <a href="{{promise.twitter_url}}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" style="width:20px; height:20px"/></a></span>
             </div>
         </li>
     {% endfor %}
