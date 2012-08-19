@@ -4279,10 +4279,6 @@ input.input-jumbo {
 #promise-modal form {
   margin: 0;
 }
-/* because this value depends on the navbar height */
-body {
-  padding-top: 80px;
-}
 .navbar .brand {
   font-family: "Courgette";
   color: #fff;
@@ -4297,6 +4293,10 @@ body {
   background-image: linear-gradient(top, #a81e1e, #8f1919);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a81e1e', endColorstr='#8f1919', GradientType=0);
+}
+body {
+  padding-top: 70px;
+  background: url(../img/body_bg.png) repeat;
 }
 .avatarbox {
   width: 180px;
