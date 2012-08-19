@@ -31,6 +31,9 @@ DURATION_UNITS = (('days', 'days'), ('weeks', 'weeks'))
 
 
 class NewPromiseForm(forms.Form):
+    """
+    Creation of new promise.
+    """
     promise_text = forms.CharField()
     duration_value = forms.ChoiceField(DURATION_VALUES)
     duration_unit = forms.ChoiceField(DURATION_UNITS)

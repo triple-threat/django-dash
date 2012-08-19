@@ -25,6 +25,10 @@ from util.decorators import superuser_required
 
 
 class MetricView(TemplateView):
+    """
+    Displays to admin (superuser) core metrics like signup (# of signups), promise (# of promises), support (# of support actions)
+    over time by minute granularity. Extensible to take any of the metrics from the event app.
+    """
     template_name = 'analytics/metric.html'
 
     @method_decorator(superuser_required)

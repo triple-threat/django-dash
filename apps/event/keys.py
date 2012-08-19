@@ -17,6 +17,9 @@
 
 
 class RedisKeyManager(object):
+    """
+    A simple layer of abstraction around storing the metric data in Redis.
+    """
 
     def _make_generic_key(self, timestamp, prefix):
         return u"{}:{}:{}:{}:{}".format(prefix, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute)

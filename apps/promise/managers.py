@@ -14,6 +14,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import datetime
 
 from django.db import models
 
@@ -26,13 +27,25 @@ class PromiseManager(models.Manager):
 
 class PromiseQuerySet(models.query.QuerySet):
     def active(self):
+        """
+        Still in progress
+        """
         return self.filter(status=1)
 
     def expired(self):
-        return self.filter(status__in=[2, 3])
+        """
+        Past its deadline
+        """
+        return self.filter(deadline__gt=datetime.datetime.now())
 
     def successful(self):
+        """
+        Successfully completed.
+        """
         return self.filter(status=2)
 
     def failed(self):
+        """
+        Was not successfully completed.
+        """
         return self.filter(status=3)

@@ -114,6 +114,9 @@ class Profile(FacebookProfileModel):
             else 'http://placekitten.com/g/{}'.format(convert.get(size))
 
     def friends(self, request):
+        """
+        Gets Profiles of Facebook Friends
+        """
         fb = get_persistent_graph(request)
         if fb:
             # TODO: iterate over the pagination info

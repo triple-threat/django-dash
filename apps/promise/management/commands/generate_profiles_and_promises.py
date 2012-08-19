@@ -27,6 +27,9 @@ from django.db.utils import IntegrityError
 
 
 class Command(BaseCommand):
+    """
+    A helper command to generate local data for testing and rolling out of new features.
+    """
     def handle(self, *args, **kwargs):
         connection.flushdb()
 

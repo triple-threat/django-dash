@@ -23,6 +23,9 @@ from promise.models import Profile, Promise
 
 
 class EmailEngine(object):
+    """
+    Base email engine for rendering a template and sending it.
+    """
     from_address = "Promise.ly <notifications@promise.ly>"
 
     def render(self):
@@ -49,6 +52,9 @@ class EmailEngine(object):
 
 
 class NewSupporterEngine(EmailEngine):
+    """
+    Email Engine for notifying a user that his/her promise was supported.
+    """
     template = 'emailer/new_supporter.html'
 
     def __init__(self, supporter_id, promise_id):
@@ -66,6 +72,9 @@ class NewSupporterEngine(EmailEngine):
 
 
 class DeadlineReminderEngine(EmailEngine):
+    """
+    Email Engine for notifying a user that his/her promise's deadline is about to arrive.
+    """
     template = 'emailer/deadline.html'
 
     def __init__(self, promise_id):

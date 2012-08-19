@@ -22,11 +22,18 @@ from event.keys import key_manager
 
 
 class MetricDataFetcher(object):
+    """
+    Fetches metric data from Redis and aggregates them in a way that can
+    nicely displayed.
+    """
     def __init__(self, metric_name, hours_before):
         self.metric_name = metric_name
         self.hours_before = int(hours_before)
 
     def get_timestamps(self):
+        """
+        Returns list of datetime  at minute granularity from hours_before to now
+        """
         now = datetime.datetime.now()
         before = now - datetime.timedelta(hours=self.hours_before)
         minutes = self.hours_before * 60

@@ -30,6 +30,9 @@ def fb():
 
 @register.inclusion_tag('parts/social.html')
 def social(promise, sharer, redirect_url=None):
+    """
+    Social sharing template tag
+    """
     redirect_url = redirect_url or promise.get_absolute_url()
 
     if sharer == promise.creator:

@@ -24,6 +24,9 @@ register = Library()
 
 @register.tag
 def userpromise(parser, token):
+    """
+    Abstracts whether a visiting user is the creator of a promise, supporter or a promise, or neither.
+    """
     try:
         tag, promise = token.contents.split()
     except (ValueError, TypeError):

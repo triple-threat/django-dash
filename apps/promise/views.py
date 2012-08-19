@@ -33,6 +33,9 @@ from event.logging import logger
 
 
 class Home(TemplateView):
+    """
+    Main promise feed
+    """
     template_name = 'home.html'
     ajax_template_name = 'ajax_home.html'
 
@@ -133,6 +136,9 @@ class NewPromise(View):
 
 
 class Support(View):
+    """
+    This view handles the user action of supporting a promise.
+    """
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -169,6 +175,9 @@ class Support(View):
 
 
 class PromisePage(TemplateView):
+    """
+    This view renders the promise landing page.
+    """
     template_name = 'promise.html'
 
     def get(self, request, promise_slug):

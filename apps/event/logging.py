@@ -24,7 +24,10 @@ from event.keys import key_manager
 
 
 class Logger(object):
-
+    """
+    Extensible logging API for core metrics and whatever else we may want in the future.
+    We simply hook into an event and can run arbitrary code.
+    """
     conn = connection
     keys = key_manager
 
