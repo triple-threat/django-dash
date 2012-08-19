@@ -4326,12 +4326,13 @@ input.input-jumbo {
   box-shadow: inset 1px 0 2px rgba(0, 0, 0, 0.2), inset -1px 0 2px rgba(0, 0, 0, 0.2);
 }
 .nav-user-avatar {
-  padding: 5px;
+  padding: 4px;
 }
 .nav-user-avatar img {
   border-radius: 2px;
   width: 30px;
   height: 30px;
+  border: 1px solid #eeeeee;
 }
 .share-navbar {
   display: inline-block;
