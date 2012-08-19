@@ -1,13 +1,10 @@
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
 
-from promise.forms import NewPromiseForm, LoginForm
+from promise.forms import NewPromiseForm
 from promise.models import Promise, Profile
 
 from util.rediz import get_support_key, get_promise_key, \
