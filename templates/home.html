@@ -8,18 +8,18 @@
         <h1>Promise.ly</h1>
     </div>
 
-    <form class="well form-search" method="POST" action="{% url new_promise %}">
+    <form class="promise-form well form-search control-group" method="POST" action="{% url new_promise %}">
         {% csrf_token %}
 
         {{ form.non_field_errors }}
 
-        {{ form.text|htmlattributes:'class="input-jumbo" placeholder="I\'ll lose 2 pounds by next week."' }}
+        {{ form.text|htmlattributes:'class="input-jumbo" placeholder="I\'ll lose 2 pounds in the next two weeks."' }}
 
         <div class="hide">
         {{ form.deadline }}
         </div>
 
-        <button type="button" class="btn btn-primary btn-large promise-button">I Promise!</button>
+        <button type="submit" class="btn btn-primary btn-large promise-button">I Promise!</button>
     </form>
 
     {% if promises %}
@@ -64,14 +64,28 @@
         <div class="modal-body">
           <h4>Set a deadline</h4>
 
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem.</p>
+          <select id="promise-duration-value" class="span1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+
+          <select id="promise-duration-unit" class="span2">
+            <option value="1">days</option>
+            <option value="2">weeks</option>
+          </select>
+
           <hr>
-          <h4>Share with friends</h4>
-          <p><a href="#" class="tooltip-test" title="Tooltip">This link</a> and <a href="#" class="tooltip-test" title="Tooltip">that link</a> should have tooltips on hover.</p>
+
+          <h4>Share on facebook</h4>
+          <label><input type="checkbox" checked="checked"/> Share my promise with my friends</label>
 
         </div>
         <div class="modal-footer">
-          <a href="#" class="btn btn-primary">Make that promise!</a>
+          <a href="#" class="btn btn-primary">Make the promise!</a>
         </div>
       </div>
 

@@ -4247,15 +4247,26 @@ input.input-jumbo {
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  -ms-transition: all 200ms;
+  -o-transition: all 200ms;
+  transition: all 200ms;
   font-size: 26px;
   padding: 32px 20px 26px 20px;
   width: 100%;
   margin-bottom: 18px;
   line-height: 1;
 }
+.input-highlight {
+  background-color: red;
+}
 .modal.fade {
   top: -300px;
 }
 .modal.fade.in {
   top: 440px;
+}
+#promise-modal h4 {
+  margin-bottom: 5px;
 }
