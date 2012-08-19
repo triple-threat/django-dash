@@ -70,13 +70,18 @@ class NewPromise(View):
 
     def get(self, request):
         if '_delayed_save' in request.session:
-            self.save_promise(request.session.pop('_delayed_save'))
+            promise = self.save_promise(request.session.pop('_delayed_save'))
+            if promise:
+                return HttpResponseRedirect(reverse('promise', args=[promise.slug]))
         return HttpResponseRedirect(reverse('home'))
 
     @method_decorator(login_required)
     def post(self, request):
-        self.save_promise(request.POST)
-        return HttpResponseRedirect(reverse('home'))
+        promise = self.save_promise(request.POST)
+        if promise:
+            return HttpResponseRedirect(reverse('promise', args=[promise.slug]))
+        else:
+            return HttpResponseRedirect(reverse('home'))
 
     def save_promise(self, data):
         form = NewPromiseForm(data)
@@ -90,6 +95,7 @@ class NewPromise(View):
                 'creator_id': new_promise.creator.id,
                 'promise_id': new_promise.id,
             })
+            return new_promise
 
 
 
