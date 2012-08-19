@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
+{% load social %}
+
 {% block head_before %}
 <meta property="og:title" content="Support {{promise.creator}}"/>
 <meta property="og:type" content="article"/>
 <meta property="og:image" content="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/211306_1104390006_3470883_n.jpg"/>
-<meta property="og:url" content="{{promise.full_url}}"/>
+<meta property="og:url" content="{{ promise.get_absolute_url }}"/>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +31,8 @@
     </div>
     <h4>&mdash; {{promise.creator}}</h4>
     <h5>{{promise.created}}</h5>
-    <a href="{{promise.facebook_url}}" target="_blank"><img src="{{ STATIC_URL }}img/fb.png" style="width:20px; height:20px"/></a> <a href="{{promise.twitter_url}}" target="_blank"><img src="{{ STATIC_URL }}img/twitter.png" style="width:20px; height:20px"/></a>
+
+    {% social promise %}
   </div>
   <div class="span3">
     Related promises

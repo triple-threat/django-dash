@@ -1,0 +1,14 @@
+{% load static %}
+
+<span style="float:right">
+  <a
+     href="https://www.facebook.com/dialog/feed?app_id={{ app_id }}&link={{ link }}&picture={{ app_icon }}&name={{ post_title }}&caption={{ post_caption }}&description={{ post_description }}&redirect_uri={{ redirect_url }}"
+     target="_blank">
+    <img src="{% get_static_prefix %}img/fb.png" style="width:20px; height:20px">
+  </a>
+  <a
+     href="http://twitter.com/?status={{ post_title }}: {{ post_description }} {{ link }}"
+     target="_blank">
+    <img src="{% get_static_prefix %}img/twitter.png" style="width:20px; height:20px">
+  </a>
+</span>
