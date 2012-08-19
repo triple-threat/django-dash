@@ -4249,6 +4249,19 @@ a.badge:hover {
 .promise-content {
   margin-left: 104px;
 }
+.promise-supporters-counter {
+  float: right;
+  text-align: center;
+  line-height: 1;
+}
+.promise-supporters-counter-number {
+  font-size: 40px;
+  font-weight: 200;
+  margin: 0;
+}
+.promise-supporters-counter-text {
+  font-size: 10px;
+}
 .promise-small .share-navbar-link img {
   width: 20px;
   height: 20px;
@@ -4329,6 +4342,11 @@ input.input-jumbo {
 .share-navbar-link img {
   width: 31px;
   height: 31px;
+}
+.share-navbar-title {
+  margin-top: 1px;
+  font-size: 11px;
+  display: inline-block;
 }
 body {
   padding-top: 70px;
