@@ -11,7 +11,8 @@ from django.utils.decorators import method_decorator
 from promise.forms import NewPromiseForm, LoginForm
 from promise.models import Promise, Profile
 
-from util.rediz import get_support_key, get_promise_key, get_ids_from_redis, connection as redis_connection
+from util.rediz import get_support_key, get_promise_key, \
+    get_ids_from_redis, connection as redis_connection
 
 
 class Home(TemplateView):
