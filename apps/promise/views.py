@@ -30,9 +30,9 @@ class Home(TemplateView):
         f = self.request.GET.get('f')
         profile = self.request.user.profile
         promises = Promise.objects.order_by('-id').active()
-        if f == 'my':
+        if f == 'my-promises':
             return Promise.objects.filter(creator=profile).active()
-        elif f == 'sprt':
+        elif f == 'supported-by-me':
             return Promise.objects.filter(supporter=profile)
         else:
             return promises
