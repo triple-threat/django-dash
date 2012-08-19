@@ -63,18 +63,37 @@
     {% social promise user.profile %}
 
     {% if promise.active %}
-     {% userpromise promise %}
-        {% owner %}
-        <p><h4>Did you already achieve your promise?</h4></p>
-        <div class="first">
-          <a href="{% url validate_promise promise.slug 2 %}" class="btn btn-primary">Succeeded</a>
-          <a href="{% url validate_promise promise.slug 3 %}" class="btn">Didn't make it this time!</a>
-        </div>
-        {% supporter %}
-        {% nothing %}
-      {% enduserpromise %}
+       {% userpromise promise %}
+          {% owner %}
+          <p><h4>Did you already achieve your promise?</h4></p>
+          <div class="first">
+            <a href="{% url validate_promise promise.slug 2 %}" class="btn btn-primary">Succeeded</a>
+            <a href="{% url validate_promise promise.slug 3 %}" class="btn">Didn't make it this time!</a>
+          </div>
+          {% supporter %}
+          {% nothing %}
+        {% enduserpromise %}
     {% else %}
-      {{ promise.status }}
+      {% userpromise promise %}
+        {% owner %}
+          {% if promise.status == 2 %}
+            <h4>You achieved this promise! Share the good news!</h4>
+          {% else %}
+            <h4>You didn't achieve the promise this time.</h4>
+          {% endif %}
+        {% supporter %}
+          {% if promise.status == 2 %}
+            <h4>{{ promise.creator.name }} achieved this promise! Share the good news!</h4>
+          {% else %}
+            <h4>{{ promise.creator.name }} didn't achieve the promise this time.</h4>
+          {% endif %}
+        {% nothing %}
+          {% if promise.status == 2 %}
+            <h4>{{ promise.creator.name }} achieved this promise! Share the good news!</h4>
+          {% else %}
+            <h4>{{ promise.creator.name }} didn't achieve the promise this time.</h4>
+          {% endif %}
+      {% enduserpromise %}
     {% endif %}
 
 
