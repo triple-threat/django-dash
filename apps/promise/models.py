@@ -60,6 +60,11 @@ class Profile(FacebookProfileModel):
     def name(self):
         return self.facebook_name or unicode(self)
 
+    @property
+    def avatar(self):
+        return u'https://graph.facebook.com/{}/picture?type=large'.format(
+            self.facebook_id) if self.facebook_id else 'http://placekitten.com/200/200'
+
     def __unicode__(self):
         return unicode(self.user)
 
