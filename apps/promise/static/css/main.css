@@ -4199,6 +4199,12 @@ a.badge:hover {
   visibility: hidden;
 }
 /*overwrites some of the bootstrap variables*/
+:focus::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+:focus:-moz-input-placeholder {
+  opacity: 0.5;
+}
 .footer {
   padding: 10px 0 4px;
   margin-top: 10px;
@@ -4272,6 +4278,17 @@ input.input-jumbo {
 }
 #promise-modal form {
   margin: 0;
+}
+/* because this value depends on the navbar height */
+body {
+  padding-top: 80px;
+}
+.navbar .brand {
+  font-family: "Courgette";
+  color: #fff;
+}
+.navbar-inner {
+  background: #A81E1E;
 }
 .avatarbox {
   width: 180px;
