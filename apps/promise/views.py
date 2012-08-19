@@ -100,7 +100,7 @@ class NewPromise(View):
             redis_connection.lpush(key, new_promise.id)
 
             # Posting to facebook
-            if data['facebook_share'] == 'on':
+            if data.get('facebook_share') == 'on':
                 post_data = social(new_promise, self.request.user.profile)
                 msg = (u'I just created a promise on Promise.ly: '
                        u'{post_description}. Please support me! {link}')
