@@ -58,22 +58,25 @@ class Profile(FacebookProfileModel):
     def name(self):
         return self.facebook_name or unicode(self)
 
-    def _get_avatar_url(self, size):
+    def get_avatar_url(self, size, local=False):
         convert = {
             'large': '180/200',
             'square': '50/50',
         }
+
+        if local and bool(self.image):
+            return url_with_domain(self.image.url)
         return u'https://graph.facebook.com/{}/picture?type={}'.format(
             self.facebook_id, size) if self.facebook_id \
             else 'http://placekitten.com/g/{}'.format(convert.get(size))
 
     @property
     def avatar_square(self):
-        return self._get_avatar_url('square')
+        return self.get_avatar_url('square')
 
     @property
     def avatar(self):
-        return self._get_avatar_url('large')
+        return self.get_avatar_url('large')
 
     def __unicode__(self):
         return unicode(self.user)
