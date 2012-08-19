@@ -28,20 +28,26 @@ class Home(TemplateView):
         return self.render_to_response(context)
 
 
-def new_promise(request):
+class NewPromise(View):
     """
     Creates a new promise
     """
-    if request.POST:
+    def get(self, request):
+        return HttpResponseRedirect(reverse('home'))
+
+    def post(self, request):
         form = NewPromiseForm(request.POST)
         if form.is_valid():
             new_promise = form.process(request)
             key = get_promise_key(request.user.profile.id)
             redis_connection.lpush(key, new_promise.id)
 
-            logger.log('promise', data={'creator_id': new_promise.creator.id, 'promise_id': new_promise.id})
-
-    return HttpResponseRedirect(reverse('home'))
+            # Logging stuff
+            logger.log('promise', data={
+                'creator_id': new_promise.creator.id,
+                'promise_id': new_promise.id,
+            })
+        return HttpResponseRedirect(reverse('home'))
 
 
 class Support(View):
@@ -79,5 +85,6 @@ class PromisePage(TemplateView):
 
 
 home = Home.as_view()
+new_promise = NewPromise.as_view()
 support = Support.as_view()
 promise = PromisePage.as_view()
