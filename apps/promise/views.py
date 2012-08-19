@@ -54,7 +54,6 @@ class ValidatePromise(View):
         return HttpResponseRedirect(reverse('promise', args=[promise_slug]))
 
 
-
 class NewPromise(View):
     """
     Creates a new promise
