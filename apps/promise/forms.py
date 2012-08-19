@@ -18,13 +18,12 @@ class NewPromiseForm(forms.Form):
     promise_text = forms.CharField()
     duration_value = forms.ChoiceField(DURATION_VALUES)
     duration_unit = forms.ChoiceField(DURATION_UNITS)
-
+    facebook_share = forms.BooleanField(initial=True, required=False)
 
     def process(self, request):
         timedelta_args = {
             self.cleaned_data['duration_unit']: int(self.cleaned_data['duration_value']),
         }
-        import ipdb; ipdb.set_trace()
         deadline = datetime.datetime.now() + datetime.timedelta(**timedelta_args)
         promise = Promise(
             text=self.cleaned_data['promise_text'],

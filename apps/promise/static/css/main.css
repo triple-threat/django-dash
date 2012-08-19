@@ -4270,6 +4270,9 @@ input.input-jumbo {
 #promise-modal h4 {
   margin-bottom: 5px;
 }
+#promise-modal form {
+  margin: 0;
+}
 .avatarbox {
   width: 180px;
   height: 200px;
