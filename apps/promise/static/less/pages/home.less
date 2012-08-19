@@ -1,5 +1,18 @@
 .t-home {
     .feed-tabs { 
         margin-bottom: 0;
+
+        .loader {
+            .square(34px);
+
+            margin-right: 10px;
+            display: none;
+            background: url(../img/loader_16.gif) center center no-repeat;
+        }
+        &.loading {
+            .loader {
+                display: block;
+            }
+        }
     }
 }

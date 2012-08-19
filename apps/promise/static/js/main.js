@@ -66,12 +66,32 @@
 
     // feed tabs
     (function() {
+
+        // activating the current tab
         var feedTabs = $('.feed-tabs');
         var activeLink = feedTabs.find('a[href$="'+ location.search +'"]');
         if (!activeLink.length) {
             activeLink = feedTabs.find('.default');
         }
         activeLink.parent('li').addClass('active');
+
+        var promiseFeedContent = $('#promise-feed-content');
+        feedTabs.on('click', 'a', function(e) {
+            e.preventDefault();
+
+            var link = $(this);
+            var url = link.attr('href');
+
+            feedTabs.addClass('loading');
+            $.ajax({
+                url: url,
+                success: function(response) {
+                    promiseFeedContent.html(response);
+                    feedTabs.removeClass('loading');
+                }
+            });
+        });
+        
     }());
 
 }());
