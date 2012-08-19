@@ -3,6 +3,14 @@ from django.conf import settings
 
 register = template.Library()
 
+
+@register.inclusion_tag('parts/fb.html')
+def fb():
+    return {
+        'app_id': settings.FACEBOOK_APP_ID,
+    }
+
+
 @register.inclusion_tag('parts/social.html')
 def social(promise, redirect_url=None):
     redirect_url = redirect_url or promise.get_absolute_url()

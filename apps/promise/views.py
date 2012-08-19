@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -89,6 +90,7 @@ class PromisePage(BasePromiseView):
     def get(self, request, promise_slug):
         context = self.default_context
         context.update({
+            'app_id': settings.FACEBOOK_APP_ID,
             'promise': Promise.objects.get(slug=promise_slug),
         })
         return self.render_to_response(context)

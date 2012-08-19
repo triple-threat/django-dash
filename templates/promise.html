@@ -2,10 +2,15 @@
 {% load social %}
 
 {% block head_before %}
+<meta property="fb:app_id" content="{{ app_id }}">
 <meta property="og:title" content="Support {{promise.creator}}">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/211306_1104390006_3470883_n.jpg">
 <meta property="og:url" content="{{ promise.get_absolute_url }}">
+{% endblock %}
+
+{% block body_before %}
+{% fb %}
 {% endblock %}
 
 {% block content %}
@@ -51,6 +56,14 @@
     </ul>
 
     {% social promise %}
+
+    <div class="followup">
+      <h4>Want to follow up this promise?</h4>
+      <div
+         class="fb-comments" data-href="{{ promise.get_absolute_url }}"
+         data-num-posts="4" data-width="470"></div>
+    </div>
+
   </div>
   <div class="span3">
     Related promises

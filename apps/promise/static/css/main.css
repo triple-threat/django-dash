@@ -4349,3 +4349,10 @@ body {
   padding: 10px 0;
   font-weight: bold;
 }
+.followup {
+  clear: both;
+  margin-top: 80px;
+}
+.followup h4 {
+  margin-bottom: 20px;
+}
