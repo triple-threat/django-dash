@@ -12,5 +12,6 @@ class Command(BaseCommand):
         now = datetime.datetime.now()
         promises = Promise.objects.all().active()
         for promise in promises:
-            if promise.deadline - now < datetime.timedelta(days=1):
+            naive_date = promise.deadline.replace(tzinfo=None)
+            if naive_date - now < datetime.timedelta(days=1):
                 DeadlineReminderEngine(promise.id).send()
