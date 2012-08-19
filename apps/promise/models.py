@@ -39,6 +39,10 @@ class Promise(models.Model):
         return self.status == 1
 
     @property
+    def success(self):
+        return self.status == 2
+
+    @property
     def supporters(self):
         return ",".join([unicode(supporter) for supporter in self.supporter.all()])
 
