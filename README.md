@@ -26,7 +26,7 @@ When the deadline of your promise is near, you will be notified so you can valid
 
 1. make sure you have mysql installed with a user called root;
 2. make sure you have redis installed;
-4. create a local.py file with the following settings:
+3. create a local.py file inside the settings folder with the following settings:
 ```
     REDIS_CONNECTION = 'redis://localhost:6379'
 
