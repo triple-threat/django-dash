@@ -2,24 +2,24 @@
 
 # About
 
-At http://promise.ly you are able to create promises and share them with your friends so they can support you untill you achieve your goal.
+At http://promise.ly, you make promises and get friends to support you so that you are able to achieve them. Likewise, you can support your friends in their endeavors through the promises they make. Also, share these promises through Facebook and Twitter to get your friends' support!
 When the deadline of your promise is near, you will be notified so you can validate if you achieved your goal or not.
-Promise.ly uses facebook, so your activies can be shared to your facebook friends automatically.
 
 
 # Features
-* Promise feed, where you can create and view promises
-* Promise feed filtering based on Facebook friends, your own promises,  and promises you support
-* Custom logging system for admin to monitor core metrics
-* Social sharing via FB post or FB/Twitter share buttons
-
+* Create promises
+* View promises on the promise feed
+* Filter promise feed by your promises, your supported promises, your friends' promises
+* Monitor core metrics through a custom metrics logging system, powered by Redis
+* Share your promises and the promises you support via Facebook and Twitter
+* Enter promises using natural language, since the form uses naive natural language processing to parse '2 weeks' from 'I want to learn yoga in 2 weeks' to autopopulate the deadline select fields in the form.
+* Receive email notifications when you get a supporter or a comment or when the deadline is near, you get a reminder.
 
 # Technologies Used
-* Redis
+* Redis for powering metrics logging and storing often accessed data like a user's promises and which promises the user supports.
 * Postgres
-* Django-facebook
-
-# Python requirements
+* Django-facebook for facebook auth and posting
+* Heroku chronograph for email notifications and promise expiration
 
 
 # How to run it locally
@@ -40,3 +40,4 @@ Promise.ly uses facebook, so your activies can be shared to your facebook friend
 5. run `make run`
 
 # What it looks like
+Check it out at http://promise.ly!
