@@ -80,6 +80,10 @@
             e.preventDefault();
 
             var link = $(this);
+
+            feedTabs.find('> li').removeClass('active');
+            link.parent('li').addClass('active');
+
             var url = link.attr('href');
 
             feedTabs.addClass('loading');

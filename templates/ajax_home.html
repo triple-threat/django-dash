@@ -1,0 +1,36 @@
+{% load social %}
+{% load promise %}
+
+<ul class="unstyled">
+{% for promise in promises %}
+    <li class="promise promise-small">
+        <div class="promise-image">
+            <img src="{{ promise.creator.avatar }}" alt="Avatar from {{ promise.creator }}">
+        </div>
+
+        <div class="promise-content">
+            <p><strong>{{ promise.creator }}</strong> promised:</p>
+            <blockquote><a href="{% url promise promise.slug %}">{{ promise.text }}</a></blockquote>
+            <p><i class="icon-time"></i> {{ promise.deadline|timeuntil }} left</p>
+
+            {% if promise.supporter.count %}
+            <p>
+            <strong>Supporters ({{ promise.supporter.count }}):</strong>
+            {{ promise.supporters|truncatewords:20 }}
+            </p>
+            {% endif %}
+
+            {% userpromise promise %}
+            {% owner %}
+            Share your promise!
+            {% supporter %}
+            <span class="label label-success">You support this.</span>
+            {% nothing %}
+            <p><a title="Support it" class="btn" href="{% url support promise.id %}"><i class="icon-heart"></i> Support promise</a></p>
+            {% enduserpromise %}
+
+            {% social promise user.profile %}
+        </div>
+    </li>
+{% endfor %}
+</ul>
