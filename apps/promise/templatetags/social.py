@@ -14,12 +14,13 @@ def fb():
 @register.inclusion_tag('parts/social.html')
 def social(promise, sharer, redirect_url=None):
     redirect_url = redirect_url or promise.get_absolute_url()
-    if sharer == promise.creator:
-        subject = "my"
-    else:
-        subject = "{}\'s".format(promise.creator.name)
 
-    post_title = u'Support {} promise'.format(subject)
+    if sharer == promise.creator:
+        subject = u"I"
+    else:
+        subject = u"{}".format(promise.creator.name)
+
+    post_title = u'{} made a promise on Promise.ly. Support it!'.format(subject)
 
     return {
         'app_id': settings.FACEBOOK_APP_ID,
