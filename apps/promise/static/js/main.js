@@ -1,64 +1,76 @@
 (function(){
 
-    var numberMap = {
-        next: 1,
-        one: 1,
-        two: 2,
-        three: 3,
-        four: 4,
-        five: 5,
-        six: 6
-    };
+    (function() {
+        // promise form
+        var numberMap = {
+            next: 1,
+            one: 1,
+            two: 2,
+            three: 3,
+            four: 4,
+            five: 5,
+            six: 6
+        };
 
-    var weekMap = {
-        day: 'days',
-        week: 'weeks'
-    };
+        var weekMap = {
+            day: 'days',
+            week: 'weeks'
+        };
 
-    // the promise form
-    $('.promise-form').submit(function(e) {
-        e.preventDefault();
+        $('.visible-promise-input').focus();
 
-        var promiseInput = $('.visible-promise-input'),
-            promise = promiseInput.val();
+        // the promise form
+        $('.promise-form').submit(function(e) {
+            e.preventDefault();
 
-        if (promise) {
+            var promiseInput = $('.visible-promise-input'),
+                promise = promiseInput.val();
 
-            // naive natural language processing
-            var mPromise = promise.match(/(\w+)\s*(week|day)\s*/i);
+            if (promise) {
+                // naive natural language processing
+                var mPromise = promise.match(/(\w+)\s+(week|day)\s*/i),
+                    durationValueSelect = $('#id_duration_value');
 
-            if (mPromise) {
-                var value = mPromise[1],
-                    unit = mPromise[2];
+                if (mPromise) {
+                    var value = mPromise[1],
+                        unit = mPromise[2];
 
-                if (isFinite(value)) {
-                    value = parseInt(value, 10);
-                } else {
-                    value = parseInt(numberMap[value.toLowerCase()] || 0, 10);
+                    if (isFinite(value)) {
+                        value = parseInt(value, 10);
+                    } else {
+                        value = parseInt(numberMap[value.toLowerCase()] || 0, 10);
+                    }
+
+                    if (value && value < 7) {
+                        durationValueSelect.val(value);
+                    }
+
+                    unit = unit.toLowerCase();
+                    $('#id_duration_unit').val(weekMap[unit]);
                 }
 
-                if (value && value < 7) {
-                    $('#id_duration_value').val(value);
-                }
+                $('.invisible-promise-input').val(promise);
+                $('#promise-modal').modal('show');
 
-                unit = unit.toLowerCase();
-                $('#id_duration_unit').val(weekMap[unit]);
+                // the fact that the input is not on the page
+                // makes it impossible to be focused
+                // delayoing the focus
+                setTimeout(function() {
+                    durationValueSelect.focus();
+                }, 200);
 
+            } else {
 
+                var controlGroup = $(this);
+                promiseInput.focus();
+
+                controlGroup.addClass('error');
+                setTimeout(function() {
+                    controlGroup.removeClass('error');
+                }, 1600);
             }
-            $('.invisible-promise-input').val(promise);
-
-            $('#promise-modal').modal('show');
-        } else {
-            var controlGroup = $(this);
-            promiseInput.focus();
-
-            controlGroup.addClass('error');
-            setTimeout(function() {
-                controlGroup.removeClass('error');
-            }, 1600);
-        }
-    });
+        });
+    }());
 
     // the navigation
     // activated the home link if you are on it

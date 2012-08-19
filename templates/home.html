@@ -12,7 +12,7 @@
 
         {{ form.non_field_errors }}
 
-        {{ form.promise_text|htmlattributes:'class="visible-promise-input input-jumbo" autofocus="autofocus" placeholder="I\'ll lose 2 pounds in the next two weeks."' }}
+        {{ form.promise_text|htmlattributes:'class="visible-promise-input input-jumbo" placeholder="I\'ll lose 2 pounds in the next two weeks."' }}
 
         <button type="submit" class="btn btn-primary btn-large promise-button">I Promise!</button>
     </form>
@@ -53,7 +53,7 @@
               <hr>
 
               <h4>Share on facebook</h4>
-              <label>{{ form.facebook_share }} Share my promise with my friends</label>
+              <label>{{ form.facebook_share }} Share promise with my friends</label>
 
             </div>
             <div class="modal-footer">
