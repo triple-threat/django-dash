@@ -37,6 +37,8 @@ class Home(TemplateView):
                 return Promise.objects.filter(creator=profile)
             elif f == 'supported-by-me':
                 return Promise.objects.filter(supporter=profile)
+            elif f == 'my-friends':
+                return Promise.objects.filter(creator__in=profile.friends(self.request))
             else:
                 return promises
         else:
