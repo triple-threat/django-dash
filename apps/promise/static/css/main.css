@@ -4228,15 +4228,19 @@ a.badge:hover {
 .promise blockquote {
   font-size: 20px;
   font-weight: 200;
+  line-height: 1.3;
+  margin-bottom: 10px;
 }
 .promise-image {
   float: left;
 }
 .promise-image img {
   width: 80px;
+  padding: 1px;
+  border: 1px #b81f1f solid;
 }
 .promise-content {
-  margin-left: 100px;
+  margin-left: 104px;
 }
 input.input-jumbo {
   -webkit-box-sizing: border-box;
@@ -4245,7 +4249,7 @@ input.input-jumbo {
   box-sizing: border-box;
   font-size: 26px;
   padding: 32px 20px 26px 20px;
-  line-height: 1;
   width: 100%;
   margin-bottom: 18px;
+  line-height: 1;
 }

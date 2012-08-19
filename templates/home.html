@@ -32,11 +32,11 @@
             <div class="promise-content">
                 <p><strong>{{ promise.creator }}</strong> promised:</p>
                 <blockquote><a href="{% url promise promise.slug %}">{{ promise.text }}</a></blockquote>
-                <p><strong>Deadline:</strong> {{ promise.deadline|timeuntil }}</p>
+                <p><strong><i class="icon-time"></i> Deadline:</strong> {{ promise.deadline|timeuntil }}</p>
 
                 {% if promise.supporter_count %}
 
-                <p><strong>Supporters ({{ promise.supporter_count }}):</strong> {{ promise.supporters|truncatewords:20 }}</p>
+                <p><strong><i class="icon-thumbs-up"></i> Supporters ({{ promise.supporter_count }}):</strong> {{ promise.supporters|truncatewords:20 }}</p>
 
                     {% if not promise.id in already_supporting %}
 
@@ -46,7 +46,7 @@
 
                 {% else %}
 
-                <p><a title="Support it" class="btn" href="{% url support promise.id user.profile.id %}"><i class="icon-thumbs-up"></i> Support it</a></p>
+                <p><a title="Support it" class="btn" href="{% url support promise.id user.profile.id %}">Support promise</a></p>
 
                 {% endif %}
 
