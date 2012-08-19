@@ -4280,8 +4280,20 @@ input.input-jumbo {
   margin: 0;
 }
 .navbar .brand {
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  -ms-transition: all 200ms;
+  -o-transition: all 200ms;
+  transition: all 200ms;
   font-family: "Courgette";
+  color: #E9E9E9;
+  text-shadow: 1px 1px #440303;
+}
+.navbar .brand:hover {
   color: #fff;
+}
+.navbar .brand:active {
+  padding: 9px 0 0 21px;
 }
 .navbar-inner {
   background-color: #9e1c1c;
