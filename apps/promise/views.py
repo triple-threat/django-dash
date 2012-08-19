@@ -45,12 +45,13 @@ def new_promise(request):
 
 
 class Support(View):
-    def get(self, request, promise_id, supporter_id):
+
+    def get(self, request, promise_id):
         """
         Adds a supporter, making sure not to duplicate.
         """
         promise = Promise.objects.get(id=promise_id)
-        supporter = Profile.objects.get(id=supporter_id)
+        supporter = Profile.objects.get(id=self.request.user.profile.id)
         if supporter != promise.creator and supporter not in promise.supporter.all():
             promise.supporter.add(supporter)
             self.update_redis(promise.id)

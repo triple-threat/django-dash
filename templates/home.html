@@ -41,7 +41,7 @@
                   {% supporter %}
                   <span class="label label-success">You support this.</span>
                   {% nothing %}
-                  <p><a title="Support it" class="btn" href="{% url support promise.id user.profile.id %}">Support promise</a></p>
+                  <p><a title="Support it" class="btn" href="{% url support promise.id %}">Support promise</a></p>
                 {% enduserpromise %}
 
                 {% social promise user.profile %}

@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^facebook/', include('django_facebook.urls')),
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
-    url(r'^support/(?P<promise_id>[\d]+)/(?:(?P<supporter_id>[\d]+)/)?$', support, name="support"),
+    url(r'^support/(?P<promise_id>[\d]+)/$', support, name="support"),
     url(r'^p/(?P<promise_slug>[a-zA-Z0-9\-_]+)/', promise, name="promise"),
 )
 

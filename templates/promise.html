@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load social %}
+{% load promise %}
 
 {% block head_before %}
 <meta property="fb:app_id" content="{{ app_id }}">
@@ -22,19 +23,18 @@
     <div class="supporters">
 
       <div class="supportit">
-        {% if promise.id not in my_promises %}
-          {% if promise.id not in already_supporting %}
-          <a href="{% url support promise.id user.profile.id %}"
+        {% userpromise promise %}
+          {% owner %}
+          <div class="first">Share your promise!</div>
+          {% supporter %}
+          <div class="label label-success first">You support this.</div>
+          {% nothing %}
+          <a href="{% url support promise.id %}"
              title="Support this promise" class="btn first">
             <i class="icon-heart"></i> 
             Support this promise
           </a>
-          {% else %}
-          <div class="label label-success first">You support this.</div>
-          {% endif %}
-        {% else %}
-          <div class="first">Share your promise!</div>
-        {% endif %}
+        {% enduserpromise %}
       </div>
 
       {% if promise.supporter.count %}
