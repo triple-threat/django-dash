@@ -45,7 +45,13 @@ class Promise(models.Model):
 
     @property
     def supporters(self):
-        return ",".join([unicode(supporter) for supporter in self.supporter.all()])
+        maxsupporters = 5
+        count = self.supporter.count()
+        if count > maxsupporters:
+            supporters = self.supporter.all()[:maxsupporters]
+            return u'{} and {} others support this'.format(
+                ', '.join(unicode(i) for i in supporters), count - maxsupporters)
+        return ", ".join(unicode(i) for i in self.supporter.all())
 
     @property
     def mailto_url(self):
