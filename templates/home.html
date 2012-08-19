@@ -7,10 +7,11 @@
 
 {% block content %}
 
+    <p class="header-message">Make a promise. get support from your friends to live up to it.</p>
+
     <form class="promise-form well form-search control-group" method="POST" action="{% url new_promise %}">
         {% csrf_token %}
 
-        {{ form.non_field_errors }}
 
         {{ form.promise_text|htmlattributes:'class="visible-promise-input input-jumbo" placeholder="I\'ll lose 2 pounds in the next two weeks."' }}
 
