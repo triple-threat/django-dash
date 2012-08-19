@@ -14,11 +14,23 @@
 * Redis
 * Celery
 
-# Instructions
+# Running locally
 
-1. `pip install -r requirements.txt`
-
-
+1. make sure you have mysql installed with a user called root;
+2. make sure you have redis installed;
+4. create a local.py file with the following settings:
 ```
+    REDIS_CONNECTION = 'redis://localhost:6379'
+
+    FACEBOOK_APP_ID = 'your_facebook_app_id'
+    FACEBOOK_APP_SECRET = 'your_facebook_app_secret'
+
+    # https://docs.djangoproject.com/en/1.4/ref/settings/#email-backend
+    EMAIL_HOST_USER = 'username'
+    EMAIL_HOST_PASSWORD = 'password'
+```
+5. run `make run`;
+
+# Running on Heroku
 
 # What it looks like
