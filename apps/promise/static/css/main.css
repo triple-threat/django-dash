@@ -4236,6 +4236,7 @@ a.badge:hover {
   font-weight: 200;
   line-height: 1.3;
   margin-bottom: 10px;
+  font-family: "Bad Script";
 }
 .promise-image {
   float: left;
@@ -4397,8 +4398,8 @@ body {
 .promiseinfo .text {
   line-height: 40px;
   font-size: 30px;
-  font-style: italic;
   font-weight: 200;
+  font-family: "Bad Script";
 }
 .promiseinfo .creator {
   margin-bottom: 10px;
