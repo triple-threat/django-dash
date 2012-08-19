@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
 from django.utils.decorators import method_decorator
 
-
 from promise.forms import NewPromiseForm, LoginForm
 from promise.models import Promise, Profile
 
@@ -95,19 +94,7 @@ class ProfilePage(TemplateView):
     pass
 
 
-class Login(TemplateView):
-    template_name = 'login.html'
-
-    def get(self, request):
-        context = {
-            'form': LoginForm(),
-        }
-        context.update(csrf(request))
-        return self.render_to_response(context)
-
-
 home = Home.as_view()
 support = Support.as_view()
 profile = ProfilePage.as_view()
 promise = PromisePage.as_view()
-login = Login.as_view()
