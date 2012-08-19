@@ -93,7 +93,7 @@ class Profile(FacebookProfileModel):
         fb = get_persistent_graph(request)
         # TODO: iterate over the pagination info
         fbids = [int(i['id']) for i in fb.get('me/friends').get('data')]
-        return Profile.objects.filter(id__in=fbids)
+        return Profile.objects.filter(facebook_id__in=fbids)
 
     def wall_post(self, request, message):
         fb = get_persistent_graph(request)
