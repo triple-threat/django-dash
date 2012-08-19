@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django_facebook.api import get_persistent_graph
 from django_facebook.models import FacebookProfileModel
 from django.template.defaultfilters import urlencode
 from django.utils.safestring import mark_safe
@@ -81,6 +82,14 @@ class Profile(FacebookProfileModel):
         return u'https://graph.facebook.com/{}/picture?type={}'.format(
             self.facebook_id, size) if self.facebook_id \
             else 'http://placekitten.com/g/{}'.format(convert.get(size))
+
+    def friends(self, request):
+        fb = get_persistent_graph(request)
+
+        # TODO: iterate over the pagination info
+        fbids = [int(i['id']) for i in fb.get('me/friends').get('data')]
+
+        return Profile.objects.filter(id__in=fbids)
 
     @property
     def avatar_square(self):
