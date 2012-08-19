@@ -15,8 +15,8 @@
 
 <div class="row">
   <div class="span3">
-    <div style="width: 200px; height:200px; overflow: hidden" >
-      <img src="{{ promise.creator.avatar }}">
+    <div class="avatarbox" style="" >
+      <img alt="{{ promise.creator.name }}" src="{{ promise.creator.avatar }}">
     </div>
     <div>
       <h4>{{ promise.supporter.count }} Supporters</h4>
@@ -26,11 +26,11 @@
     </div>
   </div>
   <div class="span6">
-    <div>
-      <span style="line-height:40px; font-size:30px"><em>"{{promise.text}}"</em></span>
-    </div>
-    <h4>&mdash; {{promise.creator}}</h4>
-    <h5>{{promise.created}}</h5>
+    <ul class="promiseinfo unstyled">
+      <li class="text">{{ promise.text }}</li>
+      <li class="creator">&mdash; {{ promise.creator }}</li>
+      <li class="created">{{ promise.created }}</li>
+    </ul>
 
     {% social promise %}
   </div>
