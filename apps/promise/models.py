@@ -63,7 +63,7 @@ class Profile(FacebookProfileModel):
     @property
     def avatar(self):
         return u'https://graph.facebook.com/{}/picture?type=large'.format(
-            self.facebook_id) if self.facebook_id else 'http://placekitten.com/200/200'
+            self.facebook_id) if self.facebook_id else 'http://placekitten.com/g/200/200'
 
     def __unicode__(self):
         return unicode(self.user)
