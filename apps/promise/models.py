@@ -48,17 +48,14 @@ class Promise(models.Model):
 
     @property
     def mailto_url(self):
-        body = unicode("'{}' - {}").format(self.text, self.creator) + unicode("\n{}").format(urlencode(self.full_url))
+        body = u"'{}' - {}".format(self.text, self.creator) + \
+            u"\n{}".format(urlencode(self.get_absolute_url()))
         subject = u"Support {}!".format(self.creator)
         res = u'mailto:&#63;body={}&subject={}'.format(urlencode(body), urlencode(subject))
         return mark_safe(res)
 
     def get_absolute_url(self):
         return url_with_domain(reverse('promise', args=(self.slug,)))
-
-    # TODO consolidate this and get_absolute_url
-    def full_url(self):
-        return self.get_absolute_url()
 
     def save(self, *args, **kwargs):
         if not self.slug:

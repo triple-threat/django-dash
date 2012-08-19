@@ -1,14 +1,14 @@
 <html>
 <p>Hey {{ promise.creator.name }}!</p>
 </br>
-<p>You made a <a href="{{ promise.full_url }}">promise</a>: "{{ promise.text }}"</p>
+<p>You made a <a href="{{ promise.get_absolute_url }}">promise</a>: "{{ promise.text }}"</p>
 </br>
 
 <p>The deadline is coming up soon.</p></br>
 <p>Did you achieve it yet? </p> </br>
 
-<p><span class="color:green"><a href="{{ promise.full_url }}">Yes, I did it!</a> | </span>
-<span class="color:red"><a href="{{ promise.full_url }}">Almost, I'm getting there!</a><span></p>
+<p><span class="color:green"><a href="{{ promise.get_absolute_url }}">Yes, I did it!</a> | </span>
+<span class="color:red"><a href="{{ promise.get_absolute_url }}">Almost, I'm getting there!</a><span></p>
 </br>
  - The Promise.ly Team
  </html>
