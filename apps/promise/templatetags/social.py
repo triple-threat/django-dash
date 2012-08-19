@@ -14,8 +14,6 @@ def fb():
 @register.inclusion_tag('parts/social.html')
 def social(promise, sharer, redirect_url=None):
     redirect_url = redirect_url or promise.get_absolute_url()
-    blah = promise.creator.get_avatar_url('large', True)
-
     if sharer == promise.creator:
         subject = "my"
     else:
