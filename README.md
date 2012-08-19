@@ -5,7 +5,6 @@
 At http://promise.ly, you make promises and get friends to support you so that you are able to achieve them. Likewise, you can support your friends in their endeavors through the promises they make. Also, share these promises through Facebook and Twitter to get your friends' support!
 When the deadline of your promise is near, you will be notified so you can validate if you achieved your goal or not.
 
-
 # Features
 * Create promises
 * View promises on the promise feed
