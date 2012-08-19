@@ -19,7 +19,6 @@ class Home(TemplateView):
     ajax_template_name = 'ajax_home.html'
 
     def get(self, request, *args, **kwargs):
-        print 'Anonymous? ', request.user.is_anonymous()
         context = {
             'promises': self.get_promises(),
         }
