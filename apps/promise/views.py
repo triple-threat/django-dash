@@ -1,9 +1,8 @@
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView, View
-from django.utils.decorators import method_decorator
+
 
 from promise.forms import NewPromiseForm
 from promise.models import Promise, Profile
@@ -22,10 +21,21 @@ class Home(TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = {
-            'promises': Promise.objects.order_by('-id').active(),
+            'promises': self.get_promises(),
             'form': NewPromiseForm(),
         }
         return self.render_to_response(context)
+
+    def get_promises(self):
+        f = self.request.GET.get('f')
+        profile = self.request.user.profile
+        promises = Promise.objects.order_by('-id').active()
+        if f == 'my':
+            return Promise.objects.filter(creator=profile).active()
+        elif f == 'sprt':
+            return Promise.objects.filter(supporter=profile)
+        else:
+            return promises
 
 
 class NewPromise(View):
