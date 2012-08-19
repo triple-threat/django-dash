@@ -68,10 +68,10 @@ class Support(View):
         """
         promise = Promise.objects.get(id=promise_id)
         supporter = Profile.objects.get(id=supporter_id)
+        import ipdb; ipdb.set_trace()
         if supporter != promise.creator and supporter not in promise.supporter.all():
             promise.supporter.add(supporter)
             self.update_redis(promise.id)
-
             logger.log('support', data={'supporter_id': supporter.id, 'promise_id': promise.id})
 
         return HttpResponseRedirect(reverse('home'))

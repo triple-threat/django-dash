@@ -43,6 +43,10 @@ class Promise(models.Model):
     def get_absolute_url(self):
         return url_with_domain(reverse('promise', args=(self.slug,)))
 
+    # TODO consolidate this and get_absolute_url
+    def full_url(self):
+        return self.get_absolute_url()
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = unique_slugify(self, self.text[:20])

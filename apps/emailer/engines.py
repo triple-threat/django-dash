@@ -20,6 +20,7 @@ class EmailEngine(object):
             self.get_recipients(),
             headers={'Reply-To': self.from_address}
         )
+        message.content_subtype = "html"
         message.send()
 
 
