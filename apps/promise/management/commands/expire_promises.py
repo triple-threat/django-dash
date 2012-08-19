@@ -1,11 +1,12 @@
-from promise.models import Profile
+import datetime
 
 from django.core.management.base import BaseCommand
-from util.tasks import refill_redis
+
+from promise.models import Promise
 
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        profiles = Profile.objects.all()
-        for prof in profiles:
-            refill_redis(prof.id)
+        now = datetime.datetime.now()
+        promises = Promise.objects.all().active()
+        promises.filter(deadline__lt=now).update(status=3)
