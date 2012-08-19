@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'^support/(?P<promise_id>[\d]+)/(?:(?P<supporter_id>[\d]+)/)?$', support, name="support"),
     url(r'^profile/(?P<username>[a-zA-Z0-9\-_]+)/', profile, name="profile"),
-    url(r'^promise/(?P<promise_slug>[a-zA-Z0-9\-_]+)/', promise, name="promise"),
+    url(r'^p/(?P<promise_slug>[a-zA-Z0-9\-_]+)/', promise, name="promise"),
 )
 
 # serves the favicon.ico from the root
