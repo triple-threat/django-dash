@@ -64,4 +64,14 @@
     // activated the home link if you are on it
     $('.navbar a[href="'+ location.pathname +'"]').parent('li').addClass('active');
 
+    // feed tabs
+    (function() {
+        var feedTabs = $('.feed-tabs');
+        var activeLink = feedTabs.find('a[href$="'+ location.search +'"]');
+        if (!activeLink.length) {
+            activeLink = feedTabs.find('.default');
+        }
+        activeLink.parent('li').addClass('active');
+    }());
+
 }());

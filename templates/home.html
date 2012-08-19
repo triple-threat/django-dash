@@ -18,13 +18,13 @@
     </form>
 
     {% if promises %}
-    <ul class="nav nav-pills">
-        <li class="active">
-            <a href="#">All</a>
-        </li>
-        <li><a href="#">My promises</a></li>
-        <li><a href="#">Supported by me</a></li>
-    </ul>
+    <div class="row">
+        <ul class="nav nav-pills feed-tabs pull-right">
+            <li><a class="default" href="{% url home %}">All</a></li>
+            <li><a href="{% url home %}?f=my-promises">My promises</a></li>
+            <li><a href="{% url home %}?f=supported-by-me">Supported by me</a></li>
+        </ul>
+    </div>
     <ul class="unstyled">
     {% for promise in promises %}
         <li class="promise promise-small">

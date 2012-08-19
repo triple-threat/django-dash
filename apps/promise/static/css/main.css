@@ -4334,6 +4334,9 @@ body {
   padding-top: 70px;
   background: url(../img/body_bg.png) repeat;
 }
+.t-home .feed-tabs {
+  margin-bottom: 0;
+}
 .avatarbox {
   overflow: hidden;
   margin-bottom: 20px;
