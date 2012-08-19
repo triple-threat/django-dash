@@ -3,3 +3,4 @@ Django==1.4
 django-facebook==4.0.9
 redis==2.6.2
 South==0.7.4
+gunicorn==0.14.6

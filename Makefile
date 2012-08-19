@@ -10,7 +10,7 @@ watch:
 setup_local:
 	gem install watchr
 	npm install less -g
-	pip install -r requirements-local.txt
+	pip install -r conf/requirements-local.txt
 
 reset_local_database:
 	mysql -uroot -e"DROP DATABASE promise_local; CREATE DATABASE promise_local;"
