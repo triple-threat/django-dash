@@ -32,11 +32,11 @@ class Home(TemplateView):
 
     def get_promises(self):
         f = self.request.GET.get('f')
-        promises = Promise.objects.order_by('-id').active()
+        promises = Promise.objects.order_by('-id')
         if self.request.user.is_authenticated():
             profile = self.request.user.profile
             if f == 'my-promises':
-                return Promise.objects.filter(creator=profile).active()
+                return Promise.objects.filter(creator=profile)
             elif f == 'supported-by-me':
                 return Promise.objects.filter(supporter=profile)
             else:
