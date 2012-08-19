@@ -3,32 +3,7 @@ import datetime
 from util.rediz import connection
 
 from emailer.tasks import send_support_email
-
-
-class RedisKeyManager(object):
-
-    def _make_generic_key(self, timestamp, prefix):
-        return u"{}:{}:{}:{}:{}".format(prefix, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute)
-
-    def get_signup_key(self, timestamp):
-        return self._make_generic_key(timestamp, 'signup')
-
-    def get_promise_key(self, timestamp):
-        return self._make_generic_key(timestamp, 'promise')
-
-    def get_support_key(self, timestamp):
-        return self._make_generic_key(timestamp, 'support')
-
-    def get_fb_share_key(self, timestamp):
-        return self._make_generic_key(timestamp, 'facebook')
-
-    def get_twitter_share_key(self, timestamp):
-        return self._make_generic_key(timestamp, 'twitter')
-
-    def get_poke_key(self, timestamp):
-        return self._make_generic_key(timestamp, 'poke')
-
-key_manager = RedisKeyManager()
+from event.keys import key_manager
 
 
 class Logger(object):
@@ -56,8 +31,8 @@ class Logger(object):
         promise_id = data.get('promise_id')
         send_support_email(supporter_id, promise_id)
 
-    def log_fb_share(self, data):
-        self.redis_log(self.keys.get_fb_share_key)
+    def log_facebook_share(self, data):
+        self.redis_log(self.keys.get_facebook_share_key)
 
     def log_twitter_share(self, data):
         self.redis_log(self.keys.get_twitter_share_key)
