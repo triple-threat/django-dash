@@ -36,25 +36,11 @@ class Promise(models.Model):
         return ",".join([unicode(supporter) for supporter in self.supporter.all()])
 
     @property
-    def facebook_url(self):
-        return u'https://www.facebook.com/sharer.php?u={}&amp;t={}'.format(
-            urlencode(self.full_url), urlencode(u"Support {}'s promise: self.text".format(self.creator)))
-
-    # -- Social properties --
-
-    @property
-    def social_content(self):
-        return u"Support {}'s promise! '{}' - {}".format(
-            self.creator.name, self.text, self.full_url)
-
-    @property
     def mailto_url(self):
         body = unicode("'{}' - {}").format(self.text, self.creator) + unicode("\n{}").format(urlencode(self.full_url))
         subject = u"Support {}!".format(self.creator)
         res = u'mailto:&#63;body={}&subject={}'.format(urlencode(body), urlencode(subject))
         return mark_safe(res)
-
-    # -- / properties --
 
     def get_absolute_url(self):
         domain = Site.objects.get_current().domain
