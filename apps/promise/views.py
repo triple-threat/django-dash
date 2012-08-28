@@ -77,8 +77,10 @@ class ValidatePromise(View):
 
         # Posting to facebook
         post_data = social(promise, self.request.user.profile)
+        supporters = promise.supporter.all()
+        supporter_names = ["@" + s.name for s in supporters]
         msg = (u'I just achieved my promise on Promise.ly: '
-               u'{post_description}. Thanks, everyone for your support!')
+               u'{post_description}. Thanks, {} for your support! {}').format(supporter_names, promise.get_absolute_url())
         self.request.user.profile.wall_post(
             self.request, msg.format(**post_data))
         return HttpResponseRedirect(reverse('promise', args=[promise_slug]))
@@ -159,7 +161,7 @@ class Support(View):
             post_data = {
                 'creator': promise.creator.name,
                 'link': promise.get_absolute_url()}
-            msg = (u'I just supported {creator}\'s promise on Promise.ly! '
+            msg = (u'I just supported @{creator}\'s promise on Promise.ly! '
                    u'Give your support, too. {link}')
             self.request.user.profile.wall_post(
                 self.request, msg.format(**post_data))

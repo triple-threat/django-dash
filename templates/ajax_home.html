@@ -16,7 +16,7 @@
             </div>
             {% endif %}
 
-            <p><strong>{{ promise.creator }}</strong> promised:</p>
+            <p><strong>{{ promise.creator.name }}</strong> promised:</p>
             <blockquote><a href="{% url promise promise.slug %}">{{ promise.text }}</a></blockquote>
             <p><i class="icon-time"></i> {{ promise.deadline|timeuntil }} left</p>
 
