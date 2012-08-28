@@ -156,9 +156,9 @@ class Support(View):
 
             # Posting to facebook
             post_data = {
-                'creator': promise.creator.name,
+                'creator_fb_id': promise.creator.facebook_id,
                 'link': promise.get_absolute_url()}
-            msg = (u'I just supported @{creator}\'s promise on Promise.ly! '
+            msg = (u'I just supported @[{creator_fb_id}]\'s promise on Promise.ly! '
                    u'Give your support, too. {link}')
             self.request.user.profile.wall_post(
                 self.request, msg.format(**post_data))
