@@ -75,7 +75,7 @@ class ValidatePromise(View):
         # Posting to facebook
         post_data = social(promise, self.request.user.profile)
         supporters = promise.supporter.all()
-        supporter_names = ["@[{}:1:{".format(s.facebook_id) + "{}".format(s.facebook_name) + "}]" for s in supporters if s.facebook_name]
+        supporter_names = ["@[{}]".format(s.facebook_id) for s in supporters]
         msg = (u'I just achieved my promise on Promise.ly: '
                u'{post_description}. Thanks, {} for your support! {}').format(supporter_names, promise.get_absolute_url())
         self.request.user.profile.wall_post(
