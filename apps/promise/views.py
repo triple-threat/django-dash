@@ -55,7 +55,7 @@ class Home(TemplateView):
 
     def get_promises(self):
         f = self.request.GET.get('f')
-        promises = Promise.objects.active()
+        promises = Promise.objects.all().active()
         if self.request.user.is_authenticated():
             profile = self.request.user.profile
             if f == 'my-promises':
