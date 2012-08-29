@@ -72,18 +72,23 @@ class ValidatePromise(View):
     Creator of a promise verifies whether or not the promise was fulfilled.
     """
     def get(self, request, promise_slug, result):
-        promise = Promise.objects.get(slug=promise_slug)
-        promise.status = result
-        promise.save()
+        try:
+            promise = Promise.objects.get(slug=promise_slug)
+        except Promise.DoesNotExist:
+            pass
+        else:
+            if request.user.profile == promise.creator:
+                promise.status = result
+                promise.save()
 
-        # Posting to facebook
-        post_data = social(promise, self.request.user.profile)
-        supporters = promise.supporter.all()
-        supporter_names = ["@[{}]".format(s.facebook_profile_url) for s in supporters]
-        msg = (u'I just achieved my promise on Promise.ly: '
-               u'{post_description}. Thanks, {} for your support! {}').format(supporter_names, promise.get_absolute_url())
-        self.request.user.profile.wall_post(
-            self.request, msg.format(**post_data))
+                # Posting to facebook
+                post_data = social(promise, self.request.user.profile)
+                supporters = promise.supporter.all()
+                supporter_names = ["@[{}]".format(s.facebook_profile_url) for s in supporters]
+                msg = (u'I just achieved my promise on Promise.ly: '
+                       u'{post_description}. Thanks, {} for your support! {}').format(supporter_names, promise.get_absolute_url())
+                self.request.user.profile.wall_post(
+                    self.request, msg.format(**post_data))
         return HttpResponseRedirect(reverse('promise', args=[promise_slug]))
 
 
