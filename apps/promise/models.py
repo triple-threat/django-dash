@@ -118,12 +118,9 @@ class Profile(FacebookProfileModel):
         Gets Profiles of Facebook Friends
         """
         fb = get_persistent_graph(request)
-        if fb:
-            # TODO: iterate over the pagination info
-            fbids = [int(i['id']) for i in fb.get('me/friends').get('data')]
-            return Profile.objects.filter(facebook_id__in=fbids)
-        else:
-            return Profile.objects.none()
+        # TODO: iterate over the pagination info
+        fbids = [int(i['id']) for i in fb.get('me/friends').get('data')]
+        return Profile.objects.filter(facebook_id__in=fbids)
 
     def wall_post(self, request, message):
         fb = get_persistent_graph(request)
