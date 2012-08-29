@@ -20,10 +20,11 @@ import datetime
 from django.core.management.base import BaseCommand
 
 from promise.models import Promise
+from django.utils import timezone
 
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        now = datetime.datetime.now().replace(tzinfo=None)
+        now = datetime.datetime.now().replace(tzinfo=timezone.utc)
         promises = Promise.objects.all().active()
         promises.filter(deadline__lt=now).update(status=3)
