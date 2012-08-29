@@ -1,0 +1,42 @@
+
+.navbar {
+    .brand {
+        .transition(all 200ms);
+
+        font-family: "Courgette";
+        color: #F3F3F3;
+        text-shadow: 1px 1px #440303;
+
+        &:hover {
+            color: #fff;
+        }
+
+        &:active {
+            padding: 9px 0 0 21px;
+        }
+    }
+
+    .nav {
+        > li a {
+            .transition(all 200ms);
+
+            &:hover {
+                background-color: #A72424;
+                box-shadow:
+                    inset 1px 0 2px rgba(0, 0, 0, 0.2),
+                    inset -1px 0 2px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+}
+
+.nav-user-avatar {
+    padding: 4px;
+
+    img {
+        border-radius: 2px;
+        width: 30px;
+        height: 30px;
+        border: 1px solid @grayLighter;
+    }
+}

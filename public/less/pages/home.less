@@ -1,0 +1,28 @@
+.t-home {
+    .header-message {
+        font-size: 24px;
+        margin: 20px 0 40px 23px;
+        text-align: left;
+        color: #444; 
+    }
+    .promise-form-help-text {
+        color: @grayLight;
+        margin-left: 10px;
+    }
+    .feed-tabs { 
+        margin-bottom: 0;
+
+        .loader {
+            .square(34px);
+
+            margin-right: 10px;
+            display: none;
+            background: url(../img/loader_16.gif) center center no-repeat;
+        }
+        &.loading {
+            .loader {
+                display: block;
+            }
+        }
+    }
+}
