@@ -55,15 +55,15 @@ class Home(TemplateView):
 
     def get_promises(self):
         f = self.request.GET.get('f')
-        promises = Promise.objects.all().active()
+        promises = Promise.objects.all().active_or_succeeded()
         if self.request.user.is_authenticated():
             profile = self.request.user.profile
             if f == 'my-promises':
-                promises = Promise.objects.filter(creator=profile).active()
+                promises = Promise.objects.filter(creator=profile).active_or_succeeded()
             elif f == 'supported-by-me':
-                promises = Promise.objects.filter(supporter=profile).active()
+                promises = Promise.objects.filter(supporter=profile).active_or_succeeded()
             elif f == 'my-friends':
-                promises = Promise.objects.filter(creator__in=profile.friends(self.request)).active()
+                promises = Promise.objects.filter(creator__in=profile.friends(self.request)).active_or_succeeded()
         return promises.order_by('-id')
 
 

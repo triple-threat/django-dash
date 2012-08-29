@@ -32,6 +32,12 @@ class PromiseQuerySet(models.query.QuerySet):
         """
         return self.filter(status=1)
 
+    def active_or_succeeded(self):
+        """
+        Either active or succeeded
+        """
+        return self.filter(status__in=[1, 2])
+
     def expired(self):
         """
         Past its deadline
