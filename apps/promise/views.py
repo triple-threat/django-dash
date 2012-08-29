@@ -18,10 +18,14 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView, View
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
+from django_facebook.views import connect
+from django_facebook.api import get_persistent_graph
 
 from promise.forms import NewPromiseForm
 from promise.models import Promise, Profile
@@ -187,6 +191,19 @@ class PromisePage(TemplateView):
             'supporters_ordered_by_friends': promise.supporters_ordered_by_friends(request),
         }
         return self.render_to_response(context)
+
+
+@csrf_exempt
+def fbconnect(request):
+    # Calling the real facebook connect() view
+    response = connect(request)
+    if not 'facebook_login' in request.REQUEST:
+        fbid = get_persistent_graph(request).get('me')['id']
+        user = authenticate(facebook_id=fbid)
+        login(request, user)
+        response.status_code = 302
+        response['Location'] = '/'
+    return response
 
 
 home = Home.as_view()

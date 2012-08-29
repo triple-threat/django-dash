@@ -38,7 +38,11 @@
                                 </li>
                                 <li>
                                     {% if user.is_anonymous %}
-                                    <a title="Login" href="{% url login %}">Login</a>
+                                    <a title="Login" href="javascript:;" onclick="document.forms['fblogin'].submit()">Login</a>
+                                    <form method="post" id="fblogin" action="{% url facebook_connect %}" style="display:none">
+                                      <input type="hidden" name="facebook_login" value="1">
+                                      <input type="hidden" name="next" value="{{ next|default:'/' }}">
+                                    </form>
                                     {% else %}
                                     <a title="Logout" href="{% url logout %}">Logout</a>
                                     {% endif %}
