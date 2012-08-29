@@ -196,7 +196,6 @@ except ImportError:
     import dj_database_url
     DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
     STATIC_URL = 'http://s3.amazonaws.com/promisely/public/'
-    DEBUG = False
 else:
     DATABASES = {
         'default': {
