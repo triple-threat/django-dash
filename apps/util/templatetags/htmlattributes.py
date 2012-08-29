@@ -23,13 +23,20 @@ register = template.Library()
 
 
 @register.filter
-def htmlattributes(value, arg):
+def htmlattributes(field, arg):
     """
         Adds html attributes to a form field.
         On your template:
             field|htmlattributes:'class="a class name" data-example="an example"'
     """
-    attrs = value.field.widget.attrs
+    attrs = field.field.widget.attrs
+
+    # saving a copy of the current field
+    # attributes, making sure that they wont be
+    # applyed to subsequent renders of this field
+    # on the same page
+    _attrs = attrs.copy()
+
     attributes = shlex.split(str(arg))
 
     for attribute in attributes:
@@ -40,4 +47,6 @@ def htmlattributes(value, arg):
 
         attrs[attr_name] = attr_value
 
-    return unicode(value)
+    rendered_field = unicode(field)
+    field.field.widget.attrs = _attrs
+    return rendered_field
